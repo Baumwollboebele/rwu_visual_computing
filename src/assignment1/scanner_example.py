@@ -3,7 +3,7 @@ from cv2 import imshow
 from cv2 import imwrite
 import os
 import numpy as np
-from imutils.perspective import four_point_transform
+from imutils.perspective import four_point_transformpytho
 print(cv2.__version__)
 
 img_path = os.path.join("src","images","doc2.jpg")
@@ -47,5 +47,6 @@ cv2.imshow("Scanned",warped )
 cv2.imshow("Binary", blackAndWhiteImage)
 
 cv2.imwrite(solution_path,cv2.resize(warped, (width, height)))
-cv2.waitKey(0)
+
+cv2.waitKey(1)
 cv2.destroyAllWindows()
