@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex asme2ej"] 1652089144 "asme2ej.aux" "asme2ej.bbl" "asme2ej" 1652089396
+["bibtex asme2ej"] 1652089144 "asme2ej.aux" "asme2ej.bbl" "asme2ej" 1652089763
   "./asmems4.bst" 1637088485 25572 9df914f5f9da27247aeffd28e6ade9b3 ""
   "asme2e.bib" 1652086893 6647 d53b13c0bade2ff95beccf7af044934a ""
-  "asme2ej.aux" 1652089395 6546 01ae7574d1f7d0775121c0848c180f12 "pdflatex"
+  "asme2ej.aux" 1652089762 6546 01ae7574d1f7d0775121c0848c180f12 "pdflatex"
   (generated)
-  "asme2ej.bbl"
   "asme2ej.blg"
-["pdflatex"] 1652089395 "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.tex" "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.pdf" "asme2ej" 1652089396
-  "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.aux" 1652089395 6546 01ae7574d1f7d0775121c0848c180f12 ""
-  "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.tex" 1652089394 27742 5d56dfe5e93e5765df1974f5dc0832dd ""
+  "asme2ej.bbl"
+["pdflatex"] 1652089762 "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.tex" "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.pdf" "asme2ej" 1652089763
+  "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.aux" 1652089762 6546 01ae7574d1f7d0775121c0848c180f12 ""
+  "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.tex" 1652089761 27968 35cd927bd05d15a0af249c6b1d9891b4 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -107,18 +107,18 @@
   "/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1586288239 4811913 0be9a7e86c70a26e5e3042966bcd7097 ""
   "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1615538224 2432456 32a137b0e201b4df40a45b07fe199ae3 ""
   "/usr/local/texlive/2020/texmf.cnf" 1586288231 577 d60164b4589a341208aff7a667fbbdcb ""
-  "asme2ej.aux" 1652089395 6546 01ae7574d1f7d0775121c0848c180f12 "pdflatex"
+  "asme2ej.aux" 1652089762 6546 01ae7574d1f7d0775121c0848c180f12 "pdflatex"
   "asme2ej.bbl" 1652089144 3939 354f95f78bfab13d641da95e5d552818 "bibtex asme2ej"
   "asme2ej.cls" 1637088203 47977 282c40134adb33c9043aa39faf8abbaa ""
-  "asme2ej.out" 1652089395 907 096162a62a222b707d565a96bca3d86c "pdflatex"
-  "asme2ej.tex" 1652089394 27742 5d56dfe5e93e5765df1974f5dc0832dd ""
+  "asme2ej.out" 1652089762 907 096162a62a222b707d565a96bca3d86c "pdflatex"
+  "asme2ej.tex" 1652089761 27968 35cd927bd05d15a0af249c6b1d9891b4 ""
   "figure/FMANU_MD_04_1274_13.jpg" 1549400030 120162 71a73894e8bde7c1215de2273fe3e099 ""
   "figure/FMANU_MD_05_1107_11.jpg" 1549400551 70065 235ac3beb008d5bc43265383e76687be ""
   "figure/FMANU_MD_05_1272_5.jpg" 1549400107 95609 5d309fc02c466ca3bea87f08e2a9d853 ""
   (generated)
   "asme2ej.out"
+  "asme2ej.pdf"
+  "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.pdf"
   "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.log"
   "asme2ej.aux"
   "asme2ej.log"
-  "asme2ej.pdf"
-  "/Users/syntax_error/GitHub/rwu_visual_computing/doc/asme2ej.pdf"
