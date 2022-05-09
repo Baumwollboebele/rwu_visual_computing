@@ -3,44 +3,50 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: asme2ej.aux
 The style file: asmems4.bst
 Database file #1: asme2e.bib
-You've used 14 entries,
+Warning--empty year in opencv_cvtColor
+Warning--empty year in opencv_rgb2gray
+Warning--empty year in opencv_smoothingimages
+Warning--empty year in opencv_gaussianblur
+Warning--empty year in opencv_getgaussiankernel
+You've used 20 entries,
             1983 wiz_defined-function locations,
-            563 strings with 4557 characters,
-and the built_in function-call counts, 2728 in all, are:
-= -- 257
-> -- 82
+            588 strings with 5408 characters,
+and the built_in function-call counts, 3758 in all, are:
+= -- 348
+> -- 106
 < -- 3
-+ -- 35
-- -- 21
-* -- 166
-:= -- 442
-add.period$ -- 15
-call.type$ -- 14
-change.case$ -- 16
++ -- 47
+- -- 27
+* -- 192
+:= -- 584
+add.period$ -- 21
+call.type$ -- 20
+change.case$ -- 22
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 145
-empty$ -- 300
-format.name$ -- 21
-if$ -- 634
+cite$ -- 25
+duplicate$ -- 191
+empty$ -- 440
+format.name$ -- 27
+if$ -- 895
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 8
-newline$ -- 82
-num.names$ -- 20
-pop$ -- 48
+int.to.str$ -- 20
+missing$ -- 9
+newline$ -- 117
+num.names$ -- 26
+pop$ -- 95
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 46
+skip$ -- 70
 stack$ -- 0
-substring$ -- 64
-swap$ -- 37
+substring$ -- 92
+swap$ -- 52
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 28
-width$ -- 16
-write$ -- 196
+warning$ -- 5
+while$ -- 36
+width$ -- 22
+write$ -- 262
+(There were 5 warnings)

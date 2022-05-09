@@ -1,15 +1,17 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Very Very Very Very Very Very Very Very Very Very Very Long Heading}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Second-Level Heading}{section.2}% 3
-\BOOKMARK [3][-]{subsubsection.2.1.1}{Third-Level Heading.}{subsection.2.1}% 4
-\BOOKMARK [1][-]{section.3}{Use of SI Units}{}% 5
-\BOOKMARK [1][-]{section.4}{Footnotes}{}% 6
-\BOOKMARK [1][-]{section.5}{Mathematics}{}% 7
-\BOOKMARK [1][-]{section.6}{Figures}{}% 8
-\BOOKMARK [2][-]{subsection.6.1}{The 1st Example of Bad Figure}{section.6}% 9
-\BOOKMARK [2][-]{subsection.6.2}{The 2nd Example of Bad Figure}{section.6}% 10
-\BOOKMARK [2][-]{subsection.6.3}{The 3rd Example of Bad Figure}{section.6}% 11
-\BOOKMARK [1][-]{section.7}{Tables}{}% 12
-\BOOKMARK [1][-]{section.8}{Citing References}{}% 13
-\BOOKMARK [1][-]{section.9}{Conclusions}{}% 14
-\BOOKMARK [1][-]{section.10}{Discussions}{}% 15
+\BOOKMARK [1][-]{section.2}{Preprocessing}{}% 2
+\BOOKMARK [1][-]{section.3}{Edge Detection}{}% 3
+\BOOKMARK [1][-]{section.4}{Corner Detction}{}% 4
+\BOOKMARK [1][-]{section.5}{Transformation}{}% 5
+\BOOKMARK [1][-]{section.6}{Binary Image}{}% 6
+\BOOKMARK [1][-]{section.7}{Summary}{}% 7
+\BOOKMARK [1][-]{section.8}{Transformation}{}% 8
+\BOOKMARK [1][-]{section.9}{Mathematics}{}% 9
+\BOOKMARK [1][-]{section.10}{Figures}{}% 10
+\BOOKMARK [2][-]{subsection.10.1}{The 1st Example of Bad Figure}{section.10}% 11
+\BOOKMARK [2][-]{subsection.10.2}{The 2nd Example of Bad Figure}{section.10}% 12
+\BOOKMARK [2][-]{subsection.10.3}{The 3rd Example of Bad Figure}{section.10}% 13
+\BOOKMARK [1][-]{section.11}{Tables}{}% 14
+\BOOKMARK [1][-]{section.12}{Citing References}{}% 15
+\BOOKMARK [1][-]{section.13}{Conclusions}{}% 16
+\BOOKMARK [1][-]{section.14}{Discussions}{}% 17

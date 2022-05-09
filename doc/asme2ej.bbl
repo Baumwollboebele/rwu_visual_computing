@@ -1,5 +1,45 @@
 \begin{thebibliography}{10}
 
+\bibitem{opencv_cvtColor}
+Documentary, O.
+\newblock cvtcolor
+\newblock
+  \url{https://docs.opencv.org/3.4/d8/d01/group__imgproc__color__conversions.html#ga397ae87e1288a81d2363b61574eb8cab}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{opencv_rgb2gray}
+Documentary, O.
+\newblock Color convertion rgb to gray
+\newblock
+  \url{https://docs.opencv.org/3.4/de/d25/imgproc_color_conversions.html#color_convert_rgb_gray}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{opencv_smoothingimages}
+Documentary, O.
+\newblock Smoothing images
+\newblock \url{https://docs.opencv.org/4.x/d4/d13/tutorial_py_filtering.html}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{opencv_gaussianblur}
+Documentary, O.
+\newblock Gaussianblur
+\newblock
+  \url{https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{opencv_getgaussiankernel}
+Documentary, O.
+\newblock getgaussiankernel
+\newblock
+  \url{https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gac05a120c1ae92a6060dd0db190a61afa}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{canny_paper}
+Canny, J., 1986,
+\newblock ``A computational approach to edge detection,''
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence,
+  {\bf PAMI-8}}(6), pp.~679--698.
+
 \bibitem{asmemanual}
 {ASME}, 2003,
 \newblock {\em {ASME} Manual {MS-4}, An {ASME} Paper}, latest~ed.
