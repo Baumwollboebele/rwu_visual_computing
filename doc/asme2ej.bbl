@@ -40,6 +40,18 @@ Canny, J., 1986,
 \newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence,
   {\bf PAMI-8}}(6), pp.~679--698.
 
+\bibitem{l1_norm}
+Weisstein, E.~W.
+\newblock L1-norm
+\newblock \url{https://mathworld.wolfram.com/L1-Norm.html}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{l2_norm}
+Weisstein, E.~W.
+\newblock L2-norm
+\newblock \url{https://mathworld.wolfram.com/L2-Norm.html}
+\newblock Accessed: 2022-05-09.
+
 \bibitem{asmemanual}
 {ASME}, 2003,
 \newblock {\em {ASME} Manual {MS-4}, An {ASME} Paper}, latest~ed.

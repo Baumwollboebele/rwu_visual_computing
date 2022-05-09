@@ -8,45 +8,47 @@ Warning--empty year in opencv_rgb2gray
 Warning--empty year in opencv_smoothingimages
 Warning--empty year in opencv_gaussianblur
 Warning--empty year in opencv_getgaussiankernel
-You've used 20 entries,
+Warning--empty year in l1_norm
+Warning--empty year in l2_norm
+You've used 22 entries,
             1983 wiz_defined-function locations,
-            588 strings with 5408 characters,
-and the built_in function-call counts, 3758 in all, are:
-= -- 348
-> -- 106
+            595 strings with 5550 characters,
+and the built_in function-call counts, 4050 in all, are:
+= -- 372
+> -- 114
 < -- 3
-+ -- 47
-- -- 27
-* -- 192
-:= -- 584
-add.period$ -- 21
-call.type$ -- 20
-change.case$ -- 22
++ -- 51
+- -- 29
+* -- 194
+:= -- 626
+add.period$ -- 23
+call.type$ -- 22
+change.case$ -- 24
 chr.to.int$ -- 0
-cite$ -- 25
-duplicate$ -- 191
-empty$ -- 440
-format.name$ -- 27
-if$ -- 895
+cite$ -- 29
+duplicate$ -- 203
+empty$ -- 484
+format.name$ -- 29
+if$ -- 969
 int.to.chr$ -- 0
-int.to.str$ -- 20
+int.to.str$ -- 22
 missing$ -- 9
-newline$ -- 117
-num.names$ -- 26
-pop$ -- 95
+newline$ -- 129
+num.names$ -- 28
+pop$ -- 113
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 70
+skip$ -- 74
 stack$ -- 0
 substring$ -- 92
-swap$ -- 52
+swap$ -- 54
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 5
-while$ -- 36
-width$ -- 22
-write$ -- 262
-(There were 5 warnings)
+warning$ -- 7
+while$ -- 38
+width$ -- 24
+write$ -- 284
+(There were 7 warnings)

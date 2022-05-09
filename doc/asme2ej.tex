@@ -200,6 +200,7 @@ In addition to the gradient we calculate the the orientation given by:
 After getting the gradient magnitude and orientation of each pixel, the edges have
 to be reduced to a thickness of one pixel which will be done with \textbf{non-maximum supression.}
 %todo
+\\\\
 \noindent
 To implement this methodologie in the document scanner, the function
 which implements the full Canny edge detector can be called.
@@ -209,10 +210,12 @@ which implements the full Canny edge detector can be called.
     $L2gradient = True, apertureSize = 3)$
 \end{center}
 
- The functions input is the noise reduced image described in \ref{section:preprocessing}.
- For Hysteresis Threshold 75 for the lower-bound and 180 for the upper bound are chosen.
-
-
+\noindent
+The functions input is the noise reduced image described in \nameref{section:preprocessing}.
+For Hysteresis Threshold 75 for the lower-bound and 180 for the upper bound are chosen.
+For several trials this settings could sufficiently generalize various documents.
+An apeerture size of 3 does also generate solid outputs.
+Instead of the predefined L1-Norm \cite{l1_norm}, the more precise L2-Norm\cite{l2_norm} is used.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
