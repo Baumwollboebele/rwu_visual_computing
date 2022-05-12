@@ -29,10 +29,10 @@
 }
 \usepackage[square,numbers]{natbib}
 
-\usepackage{url}
-\usepackage{breakurl}
-\usepackage[breaklinks]{hyperref}   
-\def\UrlBreaks{\do\/\do-}
+% \usepackage{url}
+% \usepackage{breakurl}
+% \usepackage[breaklinks]{hyperref}   
+%\def\UrlBreaks{\do\/\do-}
 
 %% The class has several options
 %  onecolumn/twocolumn - format for one or two columns per page
@@ -175,6 +175,7 @@ The gaussian filter coefficients are computated with the following formula\cite{
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Edge Detection}
+\label{section:edgedetection}
 % edges = Canny(blurred_image,75,180, L2gradient=True)
 \noindent
 After we took our preprocessing step and chose a suitable noise reduction algorithm 
@@ -208,23 +209,45 @@ to be reduced to a thickness of one pixel which will be done with \textbf{non-ma
 \\\\
 \noindent
 To implement this methodologie in the document scanner, the function
-which implements the full Canny edge detector can be called.
+which implements the full Canny edge detector\cite{opencv_canny} can be called.
 \begin{center}
     \noindent
     $Canny(blurred\_image,75, 180,$\\
     $L2gradient = True, apertureSize = 3)$
 \end{center}
-
 \noindent
 The functions input is the noise reduced image described in \nameref{section:preprocessing}.
 For Hysteresis Threshold 75 for the lower-bound and 180 for the upper bound are chosen.
-For several trials this settings could sufficiently generalize various documents.
-An apeerture size of 3 does also generate solid outputs.
+In several trials this settings could sufficiently provide the overall best results, 
+when setting the aperture size to 3.
 Instead of the predefined L1-Norm \cite{l1_norm}, the more precise L2-Norm\cite{l2_norm} is used.
+\\\\
+The canny edge detection filter returns an binary output image with edges
+beeing set to 1 and other points being set to 0.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Corner Detction}
+To find the corner of the document the previously generated edges 
+in \nameref{section:edgedetection} have to be evaluated.
+For this purpose, contours are formed which are represented by a curve that connects all 
+continuous points with each other.\cite{SUZUKI198532}
+
+The OpenCV function\cite{opencv_findcontours} is used as follows:
+\begin{center}
+    \noindent
+    $contours, hierarchy = findContours(edges,$\\
+    $RETR\_LIST, CHAIN\_APPROX\_SIMPLE)$
+\end{center}
+
+Where the input are the previously generated edges, the retrieval 
+mode\cite{opencv_retrievalmode} which is 
+set to retrieve the contours without establishing any hierarchical relationships 
+and the contour approximation mode\cite{opencv_approxmode} which is set to ouput only their endopints.
+(E.g: A rectengular contour is defined by the 4 corner points)
+
+
+
 % findContours
 % Paper:
 % https://reader.elsevier.com/reader/sd/pii/0734189X85900167?token=11C96FBB310332A0D41181ED5B29CA355D79630C93940FA6DCEABD7D12A580B1F46464823FDA2CB7D695CA063C30B005&originRegion=eu-west-1&originCreation=20220509094855

@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex asme2ej"] 1652351177 "asme2ej.aux" "asme2ej.bbl" "asme2ej" 1652351180
+["bibtex asme2ej"] 1652359565 "asme2ej.aux" "asme2ej.bbl" "asme2ej" 1652359581
   "D:/Programme/MikeTEX/bibtex/bst/bibtex/alpha.bst" 1291868336 23907 a5f93555796fb564b924339521f10a7c ""
-  "asme2e.bib" 1652350603 7312 4d61c66fca3e890ae595cc2e72850b28 ""
-  "asme2ej.aux" 1652351180 2385 a89543f25fade068e120dc066302b64a "pdflatex"
+  "asme2e.bib" 1652359326 8351 11a603735fd63c1d0a22565b34de8c69 ""
+  "asme2ej.aux" 1652359581 2820 98a437c3a7e883655abeedf775e56904 "pdflatex"
   (generated)
   "asme2ej.blg"
   "asme2ej.bbl"
-["pdflatex"] 1652351177 "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.tex" "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.pdf" "asme2ej" 1652351180
+["pdflatex"] 1652359579 "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.tex" "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.pdf" "asme2ej" 1652359581
   "C:/Users/felix/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1614078381 9282573 f56a84eda2f532a3fc9a8853006a31ca ""
-  "C:/Users/felix/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1652350992 118355 f554a089746284f6f307bb85ace3f406 ""
+  "C:/Users/felix/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1652355436 118355 f554a089746284f6f307bb85ace3f406 ""
   "D:/Programme/MikeTEX/fonts/enc/dvips/base/8r.enc" 1458477487 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "D:/Programme/MikeTEX/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
   "D:/Programme/MikeTEX/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -91,17 +91,17 @@
   "D:/Programme/MikeTEX/tex/latex/refcount/refcount.sty" 1576437552 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "D:/Programme/MikeTEX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1575574882 9715 b051d5b493d9fe5f4bc251462d039e5f ""
   "D:/Programme/MikeTEX/tex/latex/url/url.sty" 1388494052 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "asme2ej.aux" 1652351180 2385 a89543f25fade068e120dc066302b64a "pdflatex"
-  "asme2ej.bbl" 1652351177 1759 d33338634c8a0bb25a172a6cd000d42d "bibtex asme2ej"
+  "asme2ej.aux" 1652359581 2820 98a437c3a7e883655abeedf775e56904 "pdflatex"
+  "asme2ej.bbl" 1652359565 2952 09c8e284bab3953f3cdfe98cb5655409 "bibtex asme2ej"
   "asme2ej.cls" 1650534711 49350 282c40134adb33c9043aa39faf8abbaa ""
-  "asme2ej.out" 1652351180 332 7f93ec1d472d3f797304a73eaef0cea1 "pdflatex"
-  "asme2ej.tex" 1652351171 29084 5fe1a63b87d41f29621b9704ca5f9f40 ""
-  "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.aux" 1652351180 2385 a89543f25fade068e120dc066302b64a ""
-  "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.tex" 1652351171 29084 5fe1a63b87d41f29621b9704ca5f9f40 ""
+  "asme2ej.out" 1652359581 332 7f93ec1d472d3f797304a73eaef0cea1 "pdflatex"
+  "asme2ej.tex" 1652359578 30213 f89c5d86da41050d430cab9dca3999d2 ""
+  "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.aux" 1652359581 2820 98a437c3a7e883655abeedf775e56904 ""
+  "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.tex" 1652359578 30213 f89c5d86da41050d430cab9dca3999d2 ""
   (generated)
-  "asme2ej.log"
+  "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.pdf"
+  "asme2ej.aux"
   "asme2ej.pdf"
   "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.log"
+  "asme2ej.log"
   "asme2ej.out"
-  "asme2ej.aux"
-  "e:/Home/GitHub/rwu_visual_computing/doc/asme2ej.pdf"
