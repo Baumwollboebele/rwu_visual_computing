@@ -16,6 +16,11 @@
 % Use at your own risk, send complaints to /dev/null                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Hoch 3 beispielbilder
+% hoch 1, schräg 2 weitere
+
+
+
 %%% use twocolumn and 10pt options with the asme2ej format
 \documentclass[twocolumn,10pt]{asme2ej}
 
@@ -28,6 +33,7 @@
 	urlcolor=blue,
 }
 \usepackage[square,numbers]{natbib}
+\usepackage{float}
 
 % \usepackage{url}
 % \usepackage{breakurl}
@@ -155,9 +161,12 @@ formula\cite{opencv_rgb2gray}:
 The next preprocessing step includes the smoothing/blurring of the grayscale image.
 This is done to remove noise from the image\cite{opencv_smoothingimages}. In our case
 the Gaussian Blurring\cite{opencv_gaussianblur} is used. The image is convolved with the Gaussian Kernel.
-As size of the kernel the size (5,5) is used. Because a document could be landscape or portrait format, 
+As size of the kernel the size (5,5) is used.
+Because a document could be landscape or portrait format, 
 it makes sense to use same values in x and y direction in the kernel size, as well as for the parameters
-sigmaX and sigmaY. These parameters are used to calculate the gaussian filter coefficients. In the function call
+sigmaX and sigmaY.
+The optimum values of these parameters were determined from the results of several scans of sample documents.
+The parameters sigmaX and sigmaY are used to calculate the gaussian filter coefficients. In the function call
 sigmaX and sigmaY are set to zero, which means the Gaussian Kernel computes these variables from the given
 ksize\cite{opencv_getgaussiankernel}.
 \begin{center}
@@ -224,7 +233,14 @@ Instead of the predefined L1-Norm \cite{l1_norm}, the more precise L2-Norm\cite{
 \\\\
 The canny edge detection filter returns an binary output image with edges
 beeing set to 1 and other points being set to 0.
+\\\\
+This can be seen in Figure \ref{fig:canny}
 
+\begin{figure}
+\centerline{\includegraphics[width=2.5in]{output/hoch_3_4_canny.jpg}}
+\caption{The output image of the canny edge detection.}
+\label{fig:canny}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Corner Detction}
@@ -244,8 +260,21 @@ Where the input are the previously generated edges, the retrieval
 mode\cite{opencv_retrievalmode} which is 
 set to retrieve the contours without establishing any hierarchical relationships 
 and the contour approximation mode\cite{opencv_approxmode} which is set to ouput only their endopints.
-(E.g: A rectengular contour is defined by the 4 corner points)
+(E.g: A rectengular contour is defined by the four corner points)
+This can be seen in Figure \ref{fig:contours}
 
+The assumption is made that the document is the largest rectangle in the image.
+The contours are hierarchically sorted according to their area, with the largest polygon with four vertices being selected.
+
+\begin{figure}
+\centerline{\includegraphics[width=2.5in]{output/hoch_3_5_contouredimage.jpg}}
+\caption{The corners of the document.}
+\label{fig:contours}
+\end{figure}
+
+% Appox Poly
+\cite{doi:10.3138/FM57-6770-U75U-7727}
+\cite{RAMER1972244}
 
 
 % findContours
@@ -257,8 +286,26 @@ and the contour approximation mode\cite{opencv_approxmode} which is set to ouput
 
 
 \section{Transformation}
-%transformation = four_point_transform(image, approx.reshape(4, 2))
-%transformation = cvtColor(transformation, COLOR_BGR2GRAY)
+% h = 3000
+%     w = int(np.floor(h*(1/np.sqrt(2))))
+%     dst_pts = np.array([[0, 0],   [w-1, 0],  [w-1, h-1], [0, h-1]], dtype=np.float32)
+%     src_pts = np.array(order_points(doc_cnts), dtype=np.float32).reshape(4,2)
+%     M = cv2.getPerspectiveTransform(src_pts, dst_pts)
+% transformation = cv2.warpPerspective(grayscale_image, M, (w, h))
+
+Before the transformation can be performed the orientation of the document in the image must be found out.
+Without knowing the content of the document, it is not possible to know the real orientation. Therefore a few assumptions are made:
+\begin{itemize}
+    \item All provided documents are portrait format
+    \item All provided documents are only rotated 90 degrees right or left, otherwise the document is scanned upside down.
+\end{itemize}
+These assumptions define the output of the scanner: A document in portrait format.
+The first task is to find out if the document is landscape or portrait in the image.
+The first point of the four corners from the previous section is highest point in the image.
+
+
+
+
 
 \section{Binary Image}
 % adaptive_binary_image = adaptiveThreshold(transformation,255,ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY,11,6)
