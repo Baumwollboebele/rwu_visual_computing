@@ -1,48 +1,50 @@
-This is BibTeX, Version 0.99d
+This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: asme2ej.aux
-Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: alpha.bst
-Reallocating 'name_of_file' (item size: 1) to 7 items.
 Database file #1: asme2e.bib
-You've used 15 entries,
+Warning--I didn't find a database entry for "opencv_getPerspectiveTransform"
+Warning--I didn't find a database entry for "opencv_warpPerspective"
+Warning--I didn't find a database entry for "pencv_adaptivetypes"
+You've used 16 entries,
             2543 wiz_defined-function locations,
-            627 strings with 6641 characters,
-and the built_in function-call counts, 4506 in all, are:
-= -- 447
-> -- 142
-< -- 13
-+ -- 49
-- -- 38
-* -- 226
-:= -- 722
-add.period$ -- 56
-call.type$ -- 15
-change.case$ -- 77
+            635 strings with 6906 characters,
+and the built_in function-call counts, 4778 in all, are:
+= -- 474
+> -- 150
+< -- 14
++ -- 52
+- -- 40
+* -- 236
+:= -- 764
+add.period$ -- 60
+call.type$ -- 16
+change.case$ -- 82
 chr.to.int$ -- 6
-cite$ -- 15
-duplicate$ -- 179
-empty$ -- 394
-format.name$ -- 66
-if$ -- 946
-int.to.chr$ -- 10
+cite$ -- 16
+duplicate$ -- 190
+empty$ -- 419
+format.name$ -- 70
+if$ -- 1004
+int.to.chr$ -- 11
 int.to.str$ -- 0
 missing$ -- 4
-newline$ -- 89
-num.names$ -- 45
-pop$ -- 155
+newline$ -- 95
+num.names$ -- 48
+pop$ -- 168
 preamble$ -- 1
-purify$ -- 92
+purify$ -- 98
 quote$ -- 0
-skip$ -- 123
+skip$ -- 130
 stack$ -- 0
-substring$ -- 185
-swap$ -- 15
-text.length$ -- 13
-text.prefix$ -- 13
+substring$ -- 192
+swap$ -- 16
+text.length$ -- 14
+text.prefix$ -- 14
 top$ -- 0
-type$ -- 120
+type$ -- 128
 warning$ -- 0
-while$ -- 36
-width$ -- 17
-write$ -- 197
+while$ -- 38
+width$ -- 18
+write$ -- 210
+(There were 3 warnings)

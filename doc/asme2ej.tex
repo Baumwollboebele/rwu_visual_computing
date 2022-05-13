@@ -231,11 +231,11 @@ In addition to the gradient we calculate the the orientation given by:
 \begin{equation}
     \phi(x,y) = arctan(\frac{g_y}{g_x})
 \end{equation}
- %todo
+
 After getting the gradient magnitude and orientation of each pixel, the edges have
-to be reduced to a thickness of one pixel which will be done with \textbf{non-maximum supression.}
-%todo
-\\\\
+to be reduced to a thickness of one pixel which will be realized with \textbf{non-maximum supression.}
+\\
+Lastly it is decided wheter a pixel will be mapped to 1 or 0 with application of \textbf{hysteresis.}\\\\
 \noindent
 To implement this methodologie in the document scanner, the function
 which implements the full Canny edge detector\cite{opencv_canny} can be called.
@@ -272,7 +272,7 @@ continuous points with each other.\cite{SUZUKI198532}
 The OpenCV function\cite{opencv_findcontours} is used as follows:
 \begin{center}
     \noindent
-    $contours, hierarchy = findContours(edges,$\\
+    $findContours(edges,$\\
     $RETR\_LIST, CHAIN\_APPROX\_SIMPLE)$
 \end{center}
 
@@ -367,7 +367,7 @@ The last step of this section is to apply the perspective transformation to the 
 For this purpose the warpPerspective function from OpenCV\cite{opencv_warpPerspective} is used:
 \begin{center}
     \noindent
-    $transformation = cv2.warpPerspective(grayscale\_image, M, (width, height))$
+    $warpPerspective(grayscale\_image, M, (width, height))$
 \end{center}
 The function uses the grayscale image, the calculated perspective Transformation(M), and the size of the 
 output image to perform the transformation. The optional parameters are set to default.
@@ -385,7 +385,29 @@ The output of the transformation can be seen in Figure \ref{fig:transformation}.
 \section{Binary Image}
 % adaptive_binary_image = adaptiveThreshold(transformation,255,ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY,11,6)
 %tresh, binary_image = threshold(transformation, 100,255,THRESH_BINARY)
+\noindent
+In the last step of the process, the transformed image is converted into a binary image.
+In various tests, it has been found that an adaptive threshold\cite{opencv_adaptivethreshold} is best suited here.
+Both an adaptive gaussian threshold\cite{pencv_adaptivetypes} and a adaptive mean threshold show great performance, 
+though an adaptive gaussian threshold tends to generate noisier outputs.
 
+\begin{center}
+    \noindent
+    $adaptive\_binary\_image\_mean = $\\
+    $adaptiveThreshold(transformation,255,$\\
+    $ADAPTIVE\_THRESH\_MEAN\_C, $\\
+    $THRESH\_BINARY,7,6)$
+\end{center}
+
+The chosen adaptive mean threshold value is a mean of the blocksize $7*7$ minus the constant $c=6$.
+The image generated after this process can be seen in figure \ref{fig:binary}
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/hoch_3_9_binary_image.jpg}}
+    \caption{The generated binary image.}
+    \label{fig:binary}
+\end{figure}
+%The threshold value T(x,y) is a mean of the 𝚋𝚕𝚘𝚌𝚔𝚂𝚒𝚣𝚎×𝚋𝚕𝚘𝚌𝚔𝚂𝚒𝚣𝚎 neighborhood of (x,y) minus C
 
 \section{Summary}
 % Ergebnisse mit beispielen
@@ -416,7 +438,6 @@ For further optimization it would be possible to add a character recognition to 
     \caption{Another document example transformed into binary document}
     \label{fig:hoch1_binary}
 \end{figure}
-
 
 
 
