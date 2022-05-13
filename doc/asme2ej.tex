@@ -34,6 +34,12 @@
 }
 \usepackage[square,numbers]{natbib}
 \usepackage{float}
+\usepackage{tikz}
+\newcommand*\redcircled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt, fill=red!40] (char) {#1};}}
+\newcommand*\bluecircled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt, fill=blue!40] (char) {#1};}}
+
 
 % \usepackage{url}
 % \usepackage{breakurl}
@@ -147,17 +153,27 @@ This paper will give your step by step guide on how it is possible to implement 
 % blurred_image = GaussianBlur(grayscale_image, ksize=(5,5),sigmaX=0,sigmaY=0)
 % Blurred picture
 
-The first step is to read the image. This is done with the imread function of openCV which 
+The first step is to read the image (Figure \ref{fig:orginial}). This is done with the imread function of openCV which 
 outputs the image as numpy array with the shape (Height, Width, Channel).
 By default the decoded image is stored in the BGR-format. Which means, the first channel contains the
 blue color channel, the second one contains the green color channel and the last the red one.
-The original image is seperately stored, because for further steps the photo is needed in a grayscale format.
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/hoch_3_1_original.jpg}}
+    \caption{Original image.}
+    \label{fig:orginial}
+\end{figure}
+The original image is seperately stored, because for further steps the photo is needed in a grayscale format (Figure \ref{fig:grayscale}).
 This convertion is made with the cvtColor\cite{opencv_cvtColor} function of openCV. The convertion of colorspace is made with the following
 formula\cite{opencv_rgb2gray}:
 \begin{center}
     $Y = B * 0.114 + G * 0.587 + R * 0.299$
     \label{eq_rgb2gray}
 \end{center}
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/hoch_3_2_grayscaleimg.jpg}}
+    \caption{Grayscale image.}
+    \label{fig:grayscale}
+\end{figure}
 The next preprocessing step includes the smoothing/blurring of the grayscale image.
 This is done to remove noise from the image\cite{opencv_smoothingimages}. In our case
 the Gaussian Blurring\cite{opencv_gaussianblur} is used. The image is convolved with the Gaussian Kernel.
@@ -178,7 +194,11 @@ The gaussian filter coefficients are computated with the following formula\cite{
     $G_i = \alpha * e^{- \frac{(i - \frac{(ksize - 1)}{2})^2}{2*\sigma^2 } }$
     \label{eq_sigma}
 \end{center}
-
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/hoch_3_3_gaussianblur.jpg}}
+    \caption{Grayscale image with Gaussian Blur.}
+    \label{fig:grayscale}
+\end{figure}
 % The heading is boldface with upper and lower case letters. 
 % If the heading should run into more than one line, the run-over is not left-flushed.
 
@@ -243,7 +263,7 @@ This can be seen in Figure \ref{fig:canny}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Corner Detction}
+\section{Corner Detection}
 To find the corner of the document the previously generated edges 
 in \nameref{section:edgedetection} have to be evaluated.
 For this purpose, contours are formed which are represented by a curve that connects all 
@@ -286,6 +306,27 @@ The contours are hierarchically sorted according to their area, with the largest
 
 
 \section{Transformation}
+\label{section:transformation}
+% def order_points(pts):    
+%     print(pts)
+%     a = np.sum(np.square(pts[0,0]-pts[1,0]))
+%     b = np.sum(np.square(pts[0,0]-pts[3,0]))
+
+%     if a > b:
+%         rect = pts.copy()
+%         rect[0] = pts[0]
+%         rect[1] = pts[3]
+%         rect[2] = pts[2]
+%         rect[3] = pts[1]
+%         return rect
+%     else:
+%         rect = pts.copy()
+%         rect[0] = pts[1]
+%         rect[1] = pts[0]
+%         rect[2] = pts[3]
+%         rect[3] = pts[2]
+%         return rect
+
 % h = 3000
 %     w = int(np.floor(h*(1/np.sqrt(2))))
 %     dst_pts = np.array([[0, 0],   [w-1, 0],  [w-1, h-1], [0, h-1]], dtype=np.float32)
@@ -296,20 +337,47 @@ The contours are hierarchically sorted according to their area, with the largest
 Before the transformation can be performed the orientation of the document in the image must be found out.
 Without knowing the content of the document, it is not possible to know the real orientation. Therefore a few assumptions are made:
 \begin{itemize}
-    \item All provided documents are portrait format
-    \item All provided documents are only rotated 90 degrees right or left, otherwise the document is scanned upside down.
+    \item[1.] All documents are in DIN A4 format
+    \item[2.] All provided documents are portrait format
+    \item[3.] All provided documents are only rotated 90 degrees right or left, otherwise the document is scanned upside down.
 \end{itemize}
 These assumptions define the output of the scanner: A document in portrait format.
 The first task is to find out if the document is landscape or portrait in the image.
 Four examples of how the document could have been recorded can be seen in Figure \ref{fig:fourcorners}.
-What is known from the list of the given four corners from the previous section is that the first element is the most upper point in the image. 
+What is known from the list of the given four corners from the previous section is that the first element \bluecircled{-} is the most upper point in the image. 
+Next, the distance of this point must be calculated with the second and fourth elements \redcircled{-} in the list and these two distances compared. For this purpose, the Euclidean distance calculation is used. If the distance to the second element is higher than to the fourth element, the document is recorded portrait. Else it was recorded landscape. 
+Relative to the previous result, the list of found points must be put into this form:
+\begin{center}
+    \noindent
+    $[\textrm{upper\_left}, \textrm{upper\_right}, \textrm{lower\_right}, \textrm{lower\_left}]$
+\end{center}
+This is used to calculate the perspective transformation from the given points to the destination points with the getPerspectiveTransform function from OpenCV\cite{opencv_getPerspectiveTransform}. The target points are the set points of the document in DIN A4 format.
+\begin{center}
+    \noindent
+    $[[0,0], [\textrm{width},0], [\textrm{width},\textrm{height}], [0,\textrm{height}]]$\\
+    $\textrm{height}=3000$\\
+    $\textrm{width}=\frac{\textrm{height}}{\sqrt[2]{2}}$
+\end{center}
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/a.png}}
+    \caption{Four examples of the orientation of a scanned document}
+    \label{fig:fourcorners}
+\end{figure}
+The last step of this section is to apply the perspective transformation to the grayscale image. 
+For this purpose the warpPerspective function from OpenCV\cite{opencv_warpPerspective} is used:
+\begin{center}
+    \noindent
+    $transformation = cv2.warpPerspective(grayscale\_image, M, (width, height))$
+\end{center}
+The function uses the grayscale image, the calculated perspective Transformation(M), and the size of the 
+output image to perform the transformation. The optional parameters are set to default.
+The output of the transformation can be seen in Figure \ref{fig:transformation}.
 
 \begin{figure}[H]
-\centerline{\includegraphics[width=2.5in]{output/a.png}}
-\caption{For document examples of the four corners in portrait or landscape format}
-\label{fig:fourcorners}
+    \centerline{\includegraphics[width=2.5in]{output/hoch_3_6_transformation.jpg}}
+    \caption{Document after the transformation.}
+    \label{fig:transformation}
 \end{figure}
-
 
 
 
@@ -321,6 +389,33 @@ What is known from the list of the given four corners from the previous section 
 
 \section{Summary}
 % Ergebnisse mit beispielen
+The example within the report and the two other examples attached below (Figures \ref{fig:schraeg2_original},\ref{fig:schraeg2_binary},\ref{fig:hoch1_original},\ref{fig:hoch1_binary}) show that the scanner does work even if the document is recorded in portrait or landscape format. The pictures of the documents show a small problem, that the recorded documents were wavy. Therefore the output documents show a wavy edge, but the content is still perfectly readable. The image of document of Figure \ref{fig:schraeg2_original} is even worse readable than the transformed document seen in Figure \ref{fig:schraeg2_binary}.\\\\
+For further optimization it would be possible to add a character recognition to find out the real orientation of the document. This would fix the cases when the document has landscape format or is upside down and the assumptions 2 and 3 in the \nameref{section:transformation} section didn't have to be made.
+
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/schraeg_2_1_original.jpg}}
+    \caption{Document recorded in landscape.}
+    \label{fig:schraeg2_original}
+\end{figure}
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/schraeg_1_8_adaptive_binary_image_mean.jpg}}
+    \caption{Document recorded in landscape transformed into binary document}
+    \label{fig:schraeg2_binary}
+\end{figure}
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/hoch_1_1_original.jpg}}
+    \caption{Document recorded in landscape.}
+    \label{fig:hoch1_original}
+\end{figure}
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=2.5in]{output/hoch_1_8_adaptive_binary_image_mean.jpg}}
+    \caption{Another document example transformed into binary document}
+    \label{fig:hoch1_binary}
+\end{figure}
 
 
 
