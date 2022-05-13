@@ -3,48 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: asme2ej.aux
 The style file: alpha.bst
 Database file #1: asme2e.bib
-Warning--I didn't find a database entry for "opencv_getPerspectiveTransform"
-Warning--I didn't find a database entry for "opencv_warpPerspective"
 Warning--I didn't find a database entry for "pencv_adaptivetypes"
-You've used 16 entries,
+You've used 20 entries,
             2543 wiz_defined-function locations,
-            635 strings with 6906 characters,
-and the built_in function-call counts, 4778 in all, are:
-= -- 474
-> -- 150
-< -- 14
-+ -- 52
-- -- 40
-* -- 236
-:= -- 764
-add.period$ -- 60
-call.type$ -- 16
-change.case$ -- 82
-chr.to.int$ -- 6
-cite$ -- 16
-duplicate$ -- 190
-empty$ -- 419
-format.name$ -- 70
-if$ -- 1004
-int.to.chr$ -- 11
+            647 strings with 7327 characters,
+and the built_in function-call counts, 5810 in all, are:
+= -- 580
+> -- 175
+< -- 17
++ -- 62
+- -- 46
+* -- 282
+:= -- 919
+add.period$ -- 74
+call.type$ -- 20
+change.case$ -- 102
+chr.to.int$ -- 7
+cite$ -- 20
+duplicate$ -- 234
+empty$ -- 516
+format.name$ -- 82
+if$ -- 1226
+int.to.chr$ -- 14
 int.to.str$ -- 0
 missing$ -- 4
-newline$ -- 95
-num.names$ -- 48
-pop$ -- 168
+newline$ -- 117
+num.names$ -- 57
+pop$ -- 209
 preamble$ -- 1
-purify$ -- 98
+purify$ -- 122
 quote$ -- 0
-skip$ -- 130
+skip$ -- 160
 stack$ -- 0
-substring$ -- 192
-swap$ -- 16
-text.length$ -- 14
-text.prefix$ -- 14
+substring$ -- 223
+swap$ -- 20
+text.length$ -- 17
+text.prefix$ -- 18
 top$ -- 0
-type$ -- 128
+type$ -- 160
 warning$ -- 0
-while$ -- 38
-width$ -- 18
-write$ -- 210
-(There were 3 warnings)
+while$ -- 44
+width$ -- 22
+write$ -- 260
+(There was 1 warning)

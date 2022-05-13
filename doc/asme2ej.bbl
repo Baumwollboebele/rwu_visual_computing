@@ -62,18 +62,39 @@ OpenCV Documentary.
   \url{https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gac05a120c1ae92a6060dd0db190a61afa}.
 \newblock Accessed: 2022-05-09.
 
-\bibitem[Doci]{opencv_retrievalmode}
+\bibitem[Doci]{opencv_getPerspectiveTransform}
+OpenCV Documentary.
+\newblock getperspectivetransform.
+\newblock
+  \url{https://docs.opencv.org/3.4/da/d54/group__imgproc__transform.html#ga15302cbff82bdcddb70158a58b73d981}.
+\newblock Accessed: 2022-05-12.
+
+\bibitem[Docj]{opencv_imread}
+OpenCV Documentary.
+\newblock imread.
+\newblock
+  \url{https://docs.opencv.org/3.4/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56}.
+\newblock Accessed: 2022-05-09.
+
+\bibitem[Dock]{opencv_retrievalmode}
 OpenCV Documentary.
 \newblock Retrievalmode.
 \newblock
   \url{https://docs.opencv.org/4.x/d3/dc0/group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71}.
 \newblock Accessed: 2022-05-12.
 
-\bibitem[Docj]{opencv_smoothingimages}
+\bibitem[Docl]{opencv_smoothingimages}
 OpenCV Documentary.
 \newblock Smoothing images.
 \newblock \url{https://docs.opencv.org/4.x/d4/d13/tutorial_py_filtering.html}.
 \newblock Accessed: 2022-05-09.
+
+\bibitem[Docm]{opencv_warpPerspective}
+OpenCV Documentary.
+\newblock warpperspective.
+\newblock
+  \url{https://docs.opencv.org/4.x/da/d54/group__imgproc__transform.html#gaf73673a7e8e18ec6963e3774e6a94b87}.
+\newblock Accessed: 2022-05-12.
 
 \bibitem[DP73]{doi:10.3138/FM57-6770-U75U-7727}
 DAVID~H DOUGLAS and THOMAS~K PEUCKER.
@@ -81,6 +102,10 @@ DAVID~H DOUGLAS and THOMAS~K PEUCKER.
   represent a digitized line or its caricature.
 \newblock {\em Cartographica: The International Journal for Geographic
   Information and Geovisualization}, 10(2):112--122, 1973.
+
+\bibitem[Ope14]{2014opencv}
+OpenCV.
+\newblock {\em The OpenCV Reference Manual}, 2.4.13.7 edition, April 2014.
 
 \bibitem[Ram72]{RAMER1972244}
 Urs Ramer.
