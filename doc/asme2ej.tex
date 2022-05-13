@@ -305,7 +305,25 @@ and the contour approximation mode\cite{opencv_approxmode} which is set to outpu
 This can be seen in Figure \ref{fig:contours}\\\\
 \noindent
 The assumption is made that the document is the largest polygon in the image.
-The contours are hierarchically sorted according to their area, with the largest polygon with four vertices being selected.
+The contours are hierarchically sorted according to their area, with the largest polygon with four vertices being selected\cite{RAMER1972244}\cite{doi:10.3138/FM57-6770-U75U-7727}.
+The polygon is found by using following functions\cite{opencv_approxpoly}\cite{opencv_arclength}:
+
+\begin{center}
+    \noindent
+    $arcLength(contour,true)$
+\end{center}
+
+\begin{center}
+    \noindent
+    $approxPolyDP(contour,$\\
+    $epsilon, true)$
+\end{center}
+\noindent
+Where we first calculate the curve perimeter which will be used as 
+input for the approximation. 
+The approximation accuracy is set to $0.05$ times the curve perimeter and 
+the bool is set to true, which indicates that the curve must be closed, thus the first and last vertices are connected.
+
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=2.5in]{output/hoch_3_5_contouredimage.jpg}}
@@ -313,9 +331,8 @@ The contours are hierarchically sorted according to their area, with the largest
 \label{fig:contours}
 \end{figure}
 
-% Appox Poly
-\cite{doi:10.3138/FM57-6770-U75U-7727}
-\cite{RAMER1972244}
+
+
 
 
 % findContours
@@ -416,7 +433,6 @@ though an adaptive mean threshold tends to generate less noise in the outputs.
 
 \begin{center}
     \noindent
-    $adaptive\_binary\_image\_mean = $\\
     $adaptiveThreshold(transformation,255,$\\
     $ADAPTIVE\_THRESH\_MEAN\_C, $\\
     $THRESH\_BINARY,7,6)$
