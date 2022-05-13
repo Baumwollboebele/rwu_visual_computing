@@ -412,7 +412,7 @@ The output of the transformation can be seen in Figure \ref{fig:transformation}.
 \noindent
 In the last step of the process, the transformed image is converted into a binary image.
 In various tests, it has been found that an adaptive threshold\cite{opencv_adaptivethreshold} is best suited.
-Both an adaptive gaussian threshold\cite{pencv_adaptivetypes} and an adaptive mean threshold show great performance, 
+Both an adaptive gaussian threshold\cite{opencv_adaptivetypes} and an adaptive mean threshold show great performance, 
 though an adaptive mean threshold tends to generate less noise in the outputs.
 
 \begin{center}
@@ -423,12 +423,12 @@ though an adaptive mean threshold tends to generate less noise in the outputs.
     $THRESH\_BINARY,7,6)$
 \end{center}
 \noindent
-
+ \noindent
 The chosen adaptive mean threshold value is a mean of the blocksize $7*7$ minus the constant $c=6$.
 The image generated after this process can be seen in figure \ref{fig:binary}
 
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/hoch_3_9_binary_image.jpg}}
+    \centerline{\includegraphics[width=2.5in]{output/hoch_3_8_adaptive_binary_image_mean.jpg}}
     \caption{The generated binary image.}
     \label{fig:binary}
 \end{figure}
