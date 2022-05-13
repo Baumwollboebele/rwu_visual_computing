@@ -105,8 +105,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-{\it This paper presents a usecase for a document scanner following the international standard ISO 216. 
-The explanations contained in this paper will be divided into five steps.
+{\it This report presents a usecase for a document scanner following the international standard ISO 216. 
+The explanations contained in this report will be divided into five steps.
 First a preprocessing step reads the image and performs basic operations on the image.
 Then corner points of the document will be detected utilizing the canny edge corner detection.
 By performing a perspective transformation, the document will then be provided in a top-view.
@@ -158,7 +158,7 @@ Before we can apply any preprocessing step we have to read the image (Figure \re
 outputs the image as numpy array with the shape (Height, Width, Channel).
 \begin{center}
     \noindent
-    $image = imread(path)$
+    $imread(path)$
 \end{center}
 \noindent
 By default the decoded image is stored in the BGR-format. Which means, the first channel contains the
@@ -186,6 +186,7 @@ formula\cite{opencv_rgb2gray}:
     \caption{Grayscale image.}
     \label{fig:grayscale}
 \end{figure}
+\noindent
 The next preprocessing step includes the blurring of the grayscale image.
 This is done to remove noise from the image\cite{opencv_smoothingimages}. In this case
 the Gaussian Blurring\cite{opencv_gaussianblur} is used. There the image is convolved with the Gaussian Kernel.
@@ -193,7 +194,7 @@ As size of the kernel the size (5,5) is used.
 Because a document could be landscape or portrait format, 
 it makes sense to use same values in x and y direction in the kernel size, as well as for the parameters
 sigmaX and sigmaY.
-The optimum values of these parameters were determined from the results of several scans of sample documents.
+The optimal values of these parameters were determined from the results of several scans of sample documents.
 The parameters sigmaX and sigmaY are used to calculate the gaussian filter coefficients. In the function call
 sigmaX and sigmaY are set to zero, which means the Gaussian Kernel computes these variables from the given
 ksize\cite{opencv_getgaussiankernel}.
@@ -206,6 +207,8 @@ The gaussian filter coefficients are computated with the following formula\cite{
     $G_i = \alpha * e^{- \frac{(i - \frac{(ksize - 1)}{2})^2}{2*\sigma^2 } }$
     \label{eq_sigma}
 \end{center}
+\noindent
+The Gaussian Blur\cite{opencv_gaussianblur} function is used as follows:
 \begin{center}
     \noindent
     $GaussianBlur(grayscale_image, ksize=(5,5),sigmaX=0,sigmaY=0)$
@@ -297,8 +300,8 @@ The OpenCV function\cite{opencv_findcontours} is used as follows:
 Where the input are the previously generated edges, the retrieval 
 mode\cite{opencv_retrievalmode} which is 
 set to retrieve the contours without establishing any hierarchical relationships 
-and the contour approximation mode\cite{opencv_approxmode} which is set to ouput only their endopints.
-(E.g: A rectengular contour is defined by the four corner points)
+and the contour approximation mode\cite{opencv_approxmode} which is set to output only their endpoints.
+(E.g: A rectangular contour is defined by the four corner points)
 This can be seen in Figure \ref{fig:contours}\\\\
 \noindent
 The assumption is made that the document is the largest polygon in the image.
@@ -367,13 +370,11 @@ What is known from the list of the given four corners from the previous section 
 Next, the distance of this point must be calculated with the second and fourth elements \redcircled{-} in the list and these two distances compared. For this purpose, the Euclidean distance calculation is used. If the distance to the second element is higher than to the fourth element, the document is recorded portrait. Otherwise it was recorded landscape. 
 Relative to the previous result, the list of found points must be put into this form:
 \begin{center}
-    \noindent
     $[\textrm{upper\_left}, \textrm{upper\_right}, \textrm{lower\_right}, \textrm{lower\_left}]$
 \end{center}
 This is used to calculate the perspective transformation from the given points to the destination points with the getPerspectiveTransform\cite{opencv_getPerspectiveTransform} function from OpenCV. 
 The target points are the set points of the document in ISO 216 format.
 \begin{center}
-    \noindent
     $[[0,0], [\textrm{width},0], [\textrm{width},\textrm{height}], [0,\textrm{height}]]$\\
     $\textrm{height}=3000$\\
     $\textrm{width}=\frac{\textrm{height}}{\sqrt[2]{2}}$
@@ -384,13 +385,11 @@ The target points are the set points of the document in ISO 216 format.
     \label{fig:fourcorners}
 \end{figure}
 \begin{center}
-    \noindent
     $getPerspectiveTransform(src_pts, dst_pts)$
 \end{center}
 The last step of this section is to apply the perspective transformation to the grayscale image. 
 For this purpose the warpPerspective function\cite{opencv_warpPerspective} from OpenCV is used:
 \begin{center}
-    \noindent
     $warpPerspective(grayscale\_image, M, (width, height))$
 \end{center}
 The function uses the grayscale image, the calculated perspective Transformation(M), and the size of the 
@@ -455,7 +454,7 @@ For further optimization it would be possible to add a character recognition to 
 
 \begin{figure}[H]
     \centerline{\includegraphics[width=2.5in]{output/hoch_1_1_original.jpg}}
-    \caption{Document recorded in landscape.}
+    \caption{Document recorded in portrait.}
     \label{fig:hoch1_original}
 \end{figure}
 
