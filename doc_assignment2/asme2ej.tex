@@ -223,7 +223,7 @@ The Gaussian Blur\cite{opencv_gaussianblur} function is used as follows:
 % If the heading should run into more than one line, the run-over is not left-flushed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edge Detection}
+\section{Corner Detection}
 \label{section:edgedetection}
 % edges = Canny(blurred_image,75,180, L2gradient=True)
 \noindent
@@ -283,7 +283,7 @@ This can be seen in Figure \ref{fig:canny}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Corner Detection}
+\section{Camera Calibration}
 \noindent
 To find the corner of the document the previously generated edges 
 in \nameref{section:edgedetection} have to be evaluated.
@@ -343,7 +343,7 @@ the bool is set to true, which indicates that the curve must be closed, thus the
 %approx = approxPolyDP(contour,epsilon,True)
 
 
-\section{Transformation}
+\section{Undistortion}
 \label{section:transformation}
 \noindent
 % def order_points(pts):    
@@ -422,7 +422,7 @@ The output of the transformation can be seen in Figure \ref{fig:transformation}.
 
 
 
-\section{Binary Image}
+\section{Summary}
 % adaptive_binary_image = adaptiveThreshold(transformation,255,ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY,11,6)
 %tresh, binary_image = threshold(transformation, 100,255,THRESH_BINARY)
 \noindent
@@ -448,37 +448,6 @@ The image generated after this process can be seen in figure \ref{fig:binary}
     \label{fig:binary}
 \end{figure}
 %The threshold value T(x,y) is a mean of the 𝚋𝚕𝚘𝚌𝚔𝚂𝚒𝚣𝚎×𝚋𝚕𝚘𝚌𝚔𝚂𝚒𝚣𝚎 neighborhood of (x,y) minus C
-
-\section{Summary}
-\noindent
-% Ergebnisse mit beispielen
-The example within the report and the two other examples attached below (Figures \ref{fig:schraeg2_original},\ref{fig:schraeg2_binary},\ref{fig:hoch1_original},\ref{fig:hoch1_binary}) show that the scanner does work even if the document is recorded in portrait or landscape format. The pictures of the documents show a small problem, that the recorded documents were wavy. Therefore the output documents show a wavy edge, but the content is still perfectly readable. The image of document of Figure \ref{fig:schraeg2_original} is even worse readable than the transformed document seen in Figure \ref{fig:schraeg2_binary}.\\\\
-For further optimization it would be possible to add a character recognition to find out the real orientation of the document. This would fix the cases when the document has landscape format or is upside down and the assumptions 2 and 3 in the section \nameref{section:transformation} didn't have to be made.
-
-
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/schraeg_2_1_original.jpg}}
-    \caption{Document recorded in landscape.}
-    \label{fig:schraeg2_original}
-\end{figure}
-
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/schraeg_1_8_adaptive_binary_image_mean.jpg}}
-    \caption{Document recorded in landscape transformed into binary document}
-    \label{fig:schraeg2_binary}
-\end{figure}
-
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/hoch_1_1_original.jpg}}
-    \caption{Document recorded in portrait.}
-    \label{fig:hoch1_original}
-\end{figure}
-
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/hoch_1_8_adaptive_binary_image_mean.jpg}}
-    \caption{Another document example transformed into binary document}
-    \label{fig:hoch1_binary}
-\end{figure}
 
 
 % % Here's where you specify the bibliography style file.
