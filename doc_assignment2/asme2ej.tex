@@ -58,7 +58,7 @@
 %% The default is oneside, onecolumn, 10pt, final
 
 
-\title{Computer Vision SS22 Assignment 1: Document Scanner}
+\title{Computer Vision SS22 Assignment 2: Camera Calibration}
 
 %%% first author
 \author{Felix Hamburger
@@ -105,10 +105,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-{\it This report presents a usecase for a document scanner following the international standard ISO 216. 
-The explanations contained in this report will be divided into five steps.
-First a preprocessing step reads the image and performs basic operations on the image.
-Then corner points of the document will be detected utilizing the canny edge corner detection.
+{\it This report presents a usecase for a camera calibration. 
+The explanations contained in this report will be divided into @@ steps.
+First a preprocessing step creates images from a video, then reads the created images and performs basic operations on the image.
+Then corner points of the document will be detected.
+
 By performing a perspective transformation, the document will then be provided in a top-view.
 With the help of a filter the document will then be changed into a binary format.
 }
@@ -150,186 +151,140 @@ This report will give a step by step guide on how it is possible to implement a 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preprocessing}
 \label{section:preprocessing}
-% grayscale_image = cvtColor(image,COLOR_BGR2GRAY)
-% blurred_image = GaussianBlur(grayscale_image, ksize=(5,5),sigmaX=0,sigmaY=0)
-% Blurred picture
 \noindent
-Before we can apply any preprocessing step we have to read the image (Figure \ref{fig:orginial}). This is done with the imread function\cite{opencv_imread} of OpenCV which 
-outputs the image as numpy array with the shape (Height, Width, Channel).
-\begin{center}
-    \noindent
-    $imread(path)$
-\end{center}
-\noindent
-By default the decoded image is stored in the BGR-format. Which means, the first channel contains the
-blue color channel, the second one contains the green color channel and the last the red one.
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/hoch_3_1_original.jpg}}
-    \caption{Original image.}
-    \label{fig:orginial}
-\end{figure}
-\noindent
-For further steps the photo is needed in a grayscale format (Figure \ref{fig:grayscale}).
-This convertion is made with the cvtColor\cite{opencv_cvtColor} function of OpenCV. The convertion of colorspace is made with the following
+Before any preprocessing can be applied, the images have to be created from the given video. Therefore each frame of the video is saved separately. This is done with the imread function\cite{opencv_imread} of OpenCV which 
+outputs the image as numpy array with the shape (Height, Width, Channel). By default the decoded image is stored in the BGR-format. Which means, the first channel contains the
+blue color channel, the second one contains the green color channel and the last the red one. In preparation for the detection of the checkerboard pattern, the images are converted to grayscale format. 
+This convertion is made with the cvtColor function\cite{opencv_cvtColor} of OpenCV. The convertion of colorspace is made with the following
 formula\cite{opencv_rgb2gray}:
 \begin{center}
     $Y = B * 0.114 + G * 0.587 + R * 0.299$
     \label{eq_rgb2gray}
 \end{center}
-\begin{center}
-    \noindent
-    $cvtColor(image,COLOR_BGR2GRAY)$
-\end{center}
-\noindent
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/hoch_3_2_grayscaleimg.jpg}}
-    \caption{Grayscale image.}
-    \label{fig:grayscale}
-\end{figure}
-\noindent
-The next preprocessing step includes the blurring of the grayscale image.
-This is done to remove noise from the image\cite{opencv_smoothingimages}. In this case
-the Gaussian Blurring\cite{opencv_gaussianblur} is used. There the image is convolved with the Gaussian Kernel.
-As size of the kernel the size (5,5) is used.
-Because a document could be landscape or portrait format, 
-it makes sense to use same values in x and y direction in the kernel size, as well as for the parameters
-sigmaX and sigmaY.
-The optimal values of these parameters were determined from the results of several scans of sample documents.
-The parameters sigmaX and sigmaY are used to calculate the gaussian filter coefficients. In the function call
-sigmaX and sigmaY are set to zero, which means the Gaussian Kernel computes these variables from the given
-ksize\cite{opencv_getgaussiankernel}.
-\begin{center}
-    $\sigma = 0.3 * (0.5 * (ksize - 1 ) - 1) + 0.8$
-    \label{eq_sigma}
-\end{center}
-The gaussian filter coefficients are computated with the following formula\cite{opencv_getgaussiankernel}:
-\begin{center}
-    $G_i = \alpha * e^{- \frac{(i - \frac{(ksize - 1)}{2})^2}{2*\sigma^2 } }$
-    \label{eq_sigma}
-\end{center}
-\noindent
-The Gaussian Blur\cite{opencv_gaussianblur} function is used as follows:
-\begin{center}
-    \noindent
-    $GaussianBlur(grayscale_image, ksize=(5,5),sigmaX=0,sigmaY=0)$
-\end{center}
-\noindent
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/hoch_3_3_gaussianblur.jpg}}
-    \caption{Grayscale image with Gaussian Blur.}
-    \label{fig:grayscale}
-\end{figure}
-% The heading is boldface with upper and lower case letters. 
-% If the heading should run into more than one line, the run-over is not left-flushed.
+
+
+
+%findChessboardCorners: https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga93efa9b0aa890de240ca32b11253dd4a
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Corner Detection}
 \label{section:edgedetection}
 % edges = Canny(blurred_image,75,180, L2gradient=True)
 \noindent
-After preprocessing steps are taken and a suitable noise reduction algorithm was chosen, the edge detection can be started.
-For edge detection the Canny edge\cite{canny_paper} detector is used, which is a multi-staged algorithm:
-\begin{enumerate}
-    \item Noise reduction.
-    \item Calculating the intensity gradient of the image.
-    \item Non-maximum supression.
-    \item Hysteresis thresholding.
-\end{enumerate}
-The noise reduction step was already described in the \nameref{section:preprocessing} section of this paper.
-\\\\
-The intensity gradient of the image is calculated using the \textbf{Sobel Filter}:
-\begin{equation}
-    S(I(x,y)) :=\sqrt{(S_x*I(x,y))^2 + S_y(*I(x,y))^2}
-\end{equation}
-Generally we can define the gradient of the Image I as:
-\begin{equation}
-    G(I(x,y)) := \sqrt[]{I_x^2 +I_y^2}
-\end{equation}
-\noindent
-In addition to the gradient we calculate the the orientation given by:
-\begin{equation}
-    \phi(x,y) = arctan(\frac{g_y}{g_x})
-\end{equation}
+After the preprocessing steps, the corners of the chessboard can be detected on the images. For this the OpenCV function findChessboardCorners\cite{opencv_findChessboardCorners} is used. As input parameters the function gets a grayscale image, the size of the pattern and already recognized corners. As size of the pattern the size 6 times 6 was chosen, because in about 500 pictures from 2000 the chessboard is recognized and the chessboard is recognized at completely different places. Since no corners are recognized before, nothing is passed at the already recognized corners. Furthermore, no flag is used and needed because the images were already converted to grayscale in preprocessing, incorrectly extracted squares were manually checked and did not occur, and there was no time pressure to speed up the detection of the corners.
+If corners of a chessboard are found in the image, the corner points are added to a list of corner points from all images.
 
-\noindent
-After getting the gradient magnitude and orientation of each pixel, the edges have
-to be reduced to a thickness of one pixel which will be realized with \textbf{non-maximum supression.}
-\\
-Lastly it is decided whether a pixel will be mapped to 1 or 0 with application of \textbf{hysteresis.}\\\\
-\noindent
-To implement this method in the document scanner, the function
-which implements the full Canny edge detector\cite{opencv_canny} can be called:
-\begin{center}
-    \noindent
-    $Canny(blurred\_image,75, 180,$\\
-    $L2gradient = True, apertureSize = 3)$
-\end{center}
-\noindent
-The functions input is the noise reduced image described in \nameref{section:preprocessing}.
-For Hysteresis Threshold 75 for the lower-bound and 180 for the upper bound are chosen.
-In several trials this settings could sufficiently provide the overall best results 
-when setting the aperture size to 3.
-Instead of the predefined L1-Norm \cite{l1_norm}, the more precise L2-Norm\cite{l2_norm} is used.
-\\\\
-The Canny edge detection filter returns an binary output image with edges
-being set to 1 and other points being set to 0.
-\\\\
-This can be seen in Figure \ref{fig:canny}
 
-\begin{figure}[H]
-\centerline{\includegraphics[width=2.5in]{output/hoch_3_4_canny.jpg}}
-\caption{The output image of the Canny edge detection.}
-\label{fig:canny}
-\end{figure}
+% After preprocessing steps are taken and a suitable noise reduction algorithm was chosen, the edge detection can be started.
+% For edge detection the Canny edge\cite{canny_paper} detector is used, which is a multi-staged algorithm:
+% \begin{enumerate}
+%     \item Noise reduction.
+%     \item Calculating the intensity gradient of the image.
+%     \item Non-maximum supression.
+%     \item Hysteresis thresholding.
+% \end{enumerate}
+% The noise reduction step was already described in the \nameref{section:preprocessing} section of this paper.
+% \\\\
+% The intensity gradient of the image is calculated using the \textbf{Sobel Filter}:
+% \begin{equation}
+%     S(I(x,y)) :=\sqrt{(S_x*I(x,y))^2 + S_y(*I(x,y))^2}
+% \end{equation}
+% Generally we can define the gradient of the Image I as:
+% \begin{equation}
+%     G(I(x,y)) := \sqrt[]{I_x^2 +I_y^2}
+% \end{equation}
+% \noindent
+% In addition to the gradient we calculate the the orientation given by:
+% \begin{equation}
+%     \phi(x,y) = arctan(\frac{g_y}{g_x})
+% \end{equation}
+
+% \noindent
+% After getting the gradient magnitude and orientation of each pixel, the edges have
+% to be reduced to a thickness of one pixel which will be realized with \textbf{non-maximum supression.}
+% \\
+% Lastly it is decided whether a pixel will be mapped to 1 or 0 with application of \textbf{hysteresis.}\\\\
+% \noindent
+% To implement this method in the document scanner, the function
+% which implements the full Canny edge detector\cite{opencv_canny} can be called:
+% \begin{center}
+%     \noindent
+%     $Canny(blurred\_image,75, 180,$\\
+%     $L2gradient = True, apertureSize = 3)$
+% \end{center}
+% \noindent
+% The functions input is the noise reduced image described in \nameref{section:preprocessing}.
+% For Hysteresis Threshold 75 for the lower-bound and 180 for the upper bound are chosen.
+% In several trials this settings could sufficiently provide the overall best results 
+% when setting the aperture size to 3.
+% Instead of the predefined L1-Norm \cite{l1_norm}, the more precise L2-Norm\cite{l2_norm} is used.
+% \\\\
+% The Canny edge detection filter returns an binary output image with edges
+% being set to 1 and other points being set to 0.
+% \\\\
+% This can be seen in Figure \ref{fig:canny}
+
+% \begin{figure}[H]
+% \centerline{\includegraphics[width=2.5in]{output/hoch_3_4_canny.jpg}}
+% \caption{The output image of the Canny edge detection.}
+% \label{fig:canny}
+% \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Camera Calibration}
 \noindent
-To find the corner of the document the previously generated edges 
-in \nameref{section:edgedetection} have to be evaluated.
-For this purpose, contours are formed which are represented by a curve that connects all 
-continuous points with each other\cite{SUZUKI198532}.\\\\
-\noindent
-The OpenCV function\cite{opencv_findcontours} is used as follows:
-\begin{center}
-    \noindent
-    $findContours(edges,$\\
-    $RETR\_LIST, CHAIN\_APPROX\_SIMPLE)$
-\end{center}
-\noindent
-Where the input are the previously generated edges, the retrieval 
-mode\cite{opencv_retrievalmode} which is 
-set to retrieve the contours without establishing any hierarchical relationships 
-and the contour approximation mode\cite{opencv_approxmode} which is set to output only their endpoints.
-(E.g: A rectangular contour is defined by the four corner points)
-This can be seen in Figure \ref{fig:contours}\\\\
-\noindent
-The assumption is made that the document is the largest polygon in the image.
-The contours are hierarchically sorted according to their area, with the largest polygon with four vertices being selected\cite{RAMER1972244}\cite{doi:10.3138/FM57-6770-U75U-7727}.
-The polygon is found by using following functions\cite{opencv_approxpoly}\cite{opencv_arclength}:
 
-\begin{center}
-    \noindent
-    $arcLength(contour,true)$
-\end{center}
-
-\begin{center}
-    \noindent
-    $approxPolyDP(contour,$\\
-    $epsilon, true)$
-\end{center}
-\noindent
-Where we first calculate the curve perimeter which will be used as 
-input for the approximation. 
-The approximation accuracy is set to $0.05$ times the curve perimeter and 
-the bool is set to true, which indicates that the curve must be closed, thus the first and last vertices are connected.
+With the list of corner points of all images the matrix is estimated.
 
 
-\begin{figure}[H]
-\centerline{\includegraphics[width=2.5in]{output/hoch_3_5_contouredimage.jpg}}
-\caption{The corners of the document.}
-\label{fig:contours}
-\end{figure}
+% calibrateCamera https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga3207604e4b1a1758aa66acb6ed5aa65d
+
+
+% To find the corner of the document the previously generated edges 
+% in \nameref{section:edgedetection} have to be evaluated.
+% For this purpose, contours are formed which are represented by a curve that connects all 
+% continuous points with each other\cite{SUZUKI198532}.\\\\
+% \noindent
+% The OpenCV function\cite{opencv_findcontours} is used as follows:
+% \begin{center}
+%     \noindent
+%     $findContours(edges,$\\
+%     $RETR\_LIST, CHAIN\_APPROX\_SIMPLE)$
+% \end{center}
+% \noindent
+% Where the input are the previously generated edges, the retrieval 
+% mode\cite{opencv_retrievalmode} which is 
+% set to retrieve the contours without establishing any hierarchical relationships 
+% and the contour approximation mode\cite{opencv_approxmode} which is set to output only their endpoints.
+% (E.g: A rectangular contour is defined by the four corner points)
+% This can be seen in Figure \ref{fig:contours}\\\\
+% \noindent
+% The assumption is made that the document is the largest polygon in the image.
+% The contours are hierarchically sorted according to their area, with the largest polygon with four vertices being selected\cite{RAMER1972244}\cite{doi:10.3138/FM57-6770-U75U-7727}.
+% The polygon is found by using following functions\cite{opencv_approxpoly}\cite{opencv_arclength}:
+
+% \begin{center}
+%     \noindent
+%     $arcLength(contour,true)$
+% \end{center}
+
+% \begin{center}
+%     \noindent
+%     $approxPolyDP(contour,$\\
+%     $epsilon, true)$
+% \end{center}
+% \noindent
+% Where we first calculate the curve perimeter which will be used as 
+% input for the approximation. 
+% The approximation accuracy is set to $0.05$ times the curve perimeter and 
+% the bool is set to true, which indicates that the curve must be closed, thus the first and last vertices are connected.
+
+
+% \begin{figure}[H]
+% \centerline{\includegraphics[width=2.5in]{output/hoch_3_5_contouredimage.jpg}}
+% \caption{The corners of the document.}
+% \label{fig:contours}
+% \end{figure}
 
 
 
@@ -447,7 +402,7 @@ The image generated after this process can be seen in figure \ref{fig:binary}
     \caption{The generated binary image.}
     \label{fig:binary}
 \end{figure}
-%The threshold value T(x,y) is a mean of the 𝚋𝚕𝚘𝚌𝚔𝚂𝚒𝚣𝚎×𝚋𝚕𝚘𝚌𝚔𝚂𝚒𝚣𝚎 neighborhood of (x,y) minus C
+%The threshold value T(x,y) is a mean of the ������������������×������������������ neighborhood of (x,y) minus C
 
 
 % % Here's where you specify the bibliography style file.
