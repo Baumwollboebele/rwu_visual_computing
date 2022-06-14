@@ -35,6 +35,9 @@
 \usepackage[square,numbers]{natbib}
 \usepackage{float}
 \usepackage{tikz}
+\usepackage{amsmath}
+
+
 \newcommand*\redcircled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt, fill=red!40] (char) {#1};}}
 \newcommand*\bluecircled[1]{\tikz[baseline=(char.base)]{
@@ -234,10 +237,62 @@ If corners of a chessboard are found in the image, the corner points are added t
 \section{Camera Calibration}
 \noindent
 
-With the list of corner points of all images the matrix is estimated.
+With the list of corner points the intrinsic camera parameters can be estimated. 
+The OpenCV function calibrateCamera\cite{opencv_calibrateCamera} is used, which is based on the algorithm of the paper by Z.Zhang\cite{zhang2000flexible} from 2000. 
+The first parameter passed is a matrix consisting of vectors of the calibration points in the coordinate space. In this case this matrix is a multi-dimensional meshgrid. Furthermore the list of corner points from the \nameref{section:edgedetection} section and the size of the image are passed to the function. The remaining passing parameters are passed as NoneType and no flags are set. The function returns the root mean squared re-projection error, the intrinsic camera matrix, the distortion coefficients and the rotation and translation vectors.
+The intrinsic camera matrix is described as follows: 
+\begin{center}
+    $K = \begin{bmatrix}
+   f_x & 0 & c_x \\
+   0 & f_y & c_y \\
+   0 & 0 & 1
+   \end{bmatrix}
+   $
+    \label{eq_intrinsicmatrix}
+\end{center}
+The returned intrinsic camera matrix from the calibrateCamera function has the values:
+@@@@@@@@@@@@@@@@@@@@
+\begin{center}
+    $K = \begin{bmatrix}
+   f_x & 0 & c_x \\
+   0 & f_y & c_y \\
+   0 & 0 & 1
+   \end{bmatrix}
+   $
+    \label{eq_calculatedintrinsicmatrix}
+\end{center}
+The calibrateCamera function returns following distortion coefficients:
+@@@@@@@@@@@@@@@@@@@@
+\begin{center}
+    $k_1 = s$\\
+    $k_2 = s$\\
+    $p_1 = s$\\
+    $p_2 = s$\\
+    $k_1 = s$\\
+    $k_1 = s$
+    \label{eq_distcoeff}
+\end{center}
+As next step the optimal camera intrinsic matrix has to be computed. For this purpose the getOptimalNewCameraMatrix function\cite{opencv_getOptimalNewCameraMatrix} is used. The function computes the optimal camera intrinsic matrix based on free scaling parameter alpha.
+The camera matrix, the distortion coefficients vector, the original and the new image size and the free scaling parameter alpha are passed as input. No further optional parameter are passed. The camera matrix and the distortion coefficients vector are the previously calculated values. As original and new image size the original size of the image is passed. The free scaling parameter alpha is set to one. Therefore all pixels are kept and no pixels are removed \cite{opencv_calibrationtutorial}.
+The optimal intrinsic camera matrix from getOptimalNewCameraMatrix has the following values:
+@@@@@@@@@@@@@@@@@@@@
+\begin{center}
+    $K = \begin{bmatrix}
+   f_x & 0 & c_x \\
+   0 & f_y & c_y \\
+   0 & 0 & 1
+   \end{bmatrix}
+   $
+    \label{eq_optintrinsicmatrix}
+\end{center}
+With the optimal intrinsic matrix the next step the undistortion can take place.
 
 
-% calibrateCamera https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga3207604e4b1a1758aa66acb6ed5aa65d
+
+
+
+
+
 
 
 % To find the corner of the document the previously generated edges 
@@ -351,11 +406,11 @@ The target points are the set points of the document in ISO 216 format.
     $\textrm{height}=3000$\\
     $\textrm{width}=\frac{\textrm{height}}{\sqrt[2]{2}}$
 \end{center}
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/a.png}}
-    \caption{Four examples of the orientation of a scanned document}
-    \label{fig:fourcorners}
-\end{figure}
+% \begin{figure}[H]
+%     \centerline{\includegraphics[width=2.5in]{output/a.png}}
+%     \caption{Four examples of the orientation of a scanned document}
+%     \label{fig:fourcorners}
+% \end{figure}
 \begin{center}
     $getPerspectiveTransform(src_pts, dst_pts)$
 \end{center}
@@ -368,11 +423,11 @@ The function uses the grayscale image, the calculated perspective Transformation
 output image to perform the transformation. The optional parameters are set to default.
 The output of the transformation can be seen in Figure \ref{fig:transformation}.
 
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/hoch_3_6_transformation.jpg}}
-    \caption{Document after the transformation.}
-    \label{fig:transformation}
-\end{figure}
+% \begin{figure}[H]
+%     \centerline{\includegraphics[width=2.5in]{output/hoch_3_6_transformation.jpg}}
+%     \caption{Document after the transformation.}
+%     \label{fig:transformation}
+% \end{figure}
 
 
 
@@ -397,11 +452,11 @@ though an adaptive mean threshold tends to generate less noise in the outputs.
 The chosen adaptive mean threshold value is a mean of the blocksize $7*7$ minus the constant $c=6$.
 The image generated after this process can be seen in figure \ref{fig:binary}
 
-\begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/hoch_3_8_adaptive_binary_image_mean.jpg}}
-    \caption{The generated binary image.}
-    \label{fig:binary}
-\end{figure}
+% \begin{figure}[H]
+%     \centerline{\includegraphics[width=2.5in]{output/hoch_3_8_adaptive_binary_image_mean.jpg}}
+%     \caption{The generated binary image.}
+%     \label{fig:binary}
+% \end{figure}
 %The threshold value T(x,y) is a mean of the ������������������×������������������ neighborhood of (x,y) minus C
 
 
