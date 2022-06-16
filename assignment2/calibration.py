@@ -65,7 +65,7 @@ def test_calibration():
 
     with open(path_summary_results + 'objs.pkl', 'rb') as f:
         t_error, ret, mtx, roi, newcameramtx, rvecs, tvecs, dist = pickle.load(f)
-        print(t_error)
+        print(f"{t_error}\n\n{ret}\n\n{mtx}\n\n{newcameramtx}\n\n{dist}")
 
         # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         images = os.listdir(path_vid_images)
@@ -86,7 +86,7 @@ def test_calibration():
                 image = image.split(".")[1]
             else:
                 image = image.split("\\")[-1]
-                image = image.split(".")[1]
+                image = image.split(".")[0]
 
 
             cv.imwrite(path_result + image + "_result.jpg", dst)
@@ -94,4 +94,3 @@ def test_calibration():
 if __name__ == '__main__':
     #calibration()
     test_calibration()
-
