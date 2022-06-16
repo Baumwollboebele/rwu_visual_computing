@@ -69,7 +69,7 @@ def test_calibration():
 
         # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         images = os.listdir(path_vid_images)
-        images = [path_vid_images+i for i in images]
+        images = [path_used_image+i for i in images]
         # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
@@ -92,6 +92,6 @@ def test_calibration():
             cv.imwrite(path_result + image + "_result.jpg", dst)
 
 if __name__ == '__main__':
-    calibration()
+    #calibration()
     test_calibration()
 
