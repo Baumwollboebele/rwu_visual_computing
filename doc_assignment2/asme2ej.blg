@@ -1,48 +1,56 @@
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: asme2ej.aux
-Reallocating 'name_of_file' (item size: 1) to 6 items.
-The style file: alpha.bst
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+The style file: asmems4.bst
 Reallocating 'name_of_file' (item size: 1) to 7 items.
 Database file #1: asme2e.bib
-You've used 13 entries,
-            2543 wiz_defined-function locations,
-            616 strings with 6457 characters,
-and the built_in function-call counts, 3621 in all, are:
-= -- 364
-> -- 97
-< -- 12
-+ -- 36
-- -- 24
-* -- 157
-:= -- 567
-add.period$ -- 50
-call.type$ -- 13
-change.case$ -- 65
-chr.to.int$ -- 3
-cite$ -- 13
-duplicate$ -- 147
-empty$ -- 330
-format.name$ -- 48
-if$ -- 766
-int.to.chr$ -- 11
-int.to.str$ -- 0
+Warning--empty year in opencv_imread
+Warning--empty year in opencv_cvtColor
+Warning--empty year in opencv_rgb2gray
+Warning--empty year in opencv_findChessboardCorners
+Warning--empty year in opencv_calibrateCamera
+Warning--empty year in opencv_getOptimalNewCameraMatrix
+Warning--empty year in opencv_calibrationtutorial
+You've used 9 entries,
+            1983 wiz_defined-function locations,
+            528 strings with 4783 characters,
+and the built_in function-call counts, 1517 in all, are:
+= -- 135
+> -- 33
+< -- 0
++ -- 17
+- -- 8
+* -- 42
+:= -- 212
+add.period$ -- 9
+call.type$ -- 9
+change.case$ -- 9
+chr.to.int$ -- 0
+cite$ -- 16
+duplicate$ -- 70
+empty$ -- 206
+format.name$ -- 8
+if$ -- 377
+int.to.chr$ -- 0
+int.to.str$ -- 9
 missing$ -- 1
-newline$ -- 79
-num.names$ -- 36
-pop$ -- 147
+newline$ -- 55
+num.names$ -- 8
+pop$ -- 68
 preamble$ -- 1
-purify$ -- 78
+purify$ -- 0
 quote$ -- 0
-skip$ -- 96
+skip$ -- 33
 stack$ -- 0
-substring$ -- 126
-swap$ -- 13
-text.length$ -- 12
-text.prefix$ -- 13
+substring$ -- 40
+swap$ -- 21
+text.length$ -- 0
+text.prefix$ -- 0
 top$ -- 0
-type$ -- 104
-warning$ -- 0
-while$ -- 26
-width$ -- 15
-write$ -- 171
+type$ -- 0
+warning$ -- 7
+while$ -- 11
+width$ -- 10
+write$ -- 102
+(There were 7 warnings)

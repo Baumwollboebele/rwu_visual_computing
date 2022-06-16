@@ -356,115 +356,16 @@ With the optimal intrinsic matrix the next step the undistortion can take place.
 \section{Undistortion}
 \label{section:transformation}
 \noindent
-% def order_points(pts):    
-%     print(pts)
-%     a = np.sum(np.square(pts[0,0]-pts[1,0]))
-%     b = np.sum(np.square(pts[0,0]-pts[3,0]))
-
-%     if a > b:
-%         rect = pts.copy()
-%         rect[0] = pts[0]
-%         rect[1] = pts[3]
-%         rect[2] = pts[2]
-%         rect[3] = pts[1]
-%         return rect
-%     else:
-%         rect = pts.copy()
-%         rect[0] = pts[1]
-%         rect[1] = pts[0]
-%         rect[2] = pts[3]
-%         rect[3] = pts[2]
-%         return rect
-
-% h = 3000
-%     w = int(np.floor(h*(1/np.sqrt(2))))
-%     dst_pts = np.array([[0, 0],   [w-1, 0],  [w-1, h-1], [0, h-1]], dtype=np.float32)
-%     src_pts = np.array(order_points(doc_cnts), dtype=np.float32).reshape(4,2)
-%     M = cv2.getPerspectiveTransform(src_pts, dst_pts)
-% transformation = cv2.warpPerspective(grayscale_image, M, (w, h))
-
-Before the transformation can be performed the orientation of the document in the image must be found out.
-Without knowing the content of the document, it is not possible to know the real orientation. Therefore a few assumptions are made:
-\begin{itemize}
-    \item[1.] All provided documents are in ISO 216 format
-    \item[2.] All provided documents are portrait format
-    \item[3.] All provided documents are only rotated 90 degrees right or left, otherwise the document is scanned upside down.
-\end{itemize}
-These assumptions define the output of the scanner: A document in portrait format.
-The first task is to find out if the document is landscape or portrait in the image.
-Four examples of how the document could have been recorded can be seen in Figure \ref{fig:fourcorners}.
-What is known from the list of the given four corners from the previous section is that the first element \bluecircled{-} is the most upper point in the image. 
-Next, the distance of this point must be calculated with the second and fourth elements \redcircled{-} in the list and these two distances compared. For this purpose, the Euclidean distance calculation is used. If the distance to the second element is higher than to the fourth element, the document is recorded portrait. Otherwise it was recorded landscape. 
-Relative to the previous result, the list of found points must be put into this form:
-\begin{center}
-    $[\textrm{upper\_left}, \textrm{upper\_right}, \textrm{lower\_right}, \textrm{lower\_left}]$
-\end{center}
-This is used to calculate the perspective transformation from the given points to the destination points with the getPerspectiveTransform\cite{opencv_getPerspectiveTransform} function from OpenCV. 
-The target points are the set points of the document in ISO 216 format.
-\begin{center}
-    $[[0,0], [\textrm{width},0], [\textrm{width},\textrm{height}], [0,\textrm{height}]]$\\
-    $\textrm{height}=3000$\\
-    $\textrm{width}=\frac{\textrm{height}}{\sqrt[2]{2}}$
-\end{center}
-% \begin{figure}[H]
-%     \centerline{\includegraphics[width=2.5in]{output/a.png}}
-%     \caption{Four examples of the orientation of a scanned document}
-%     \label{fig:fourcorners}
-% \end{figure}
-\begin{center}
-    $getPerspectiveTransform(src_pts, dst_pts)$
-\end{center}
-The last step of this section is to apply the perspective transformation to the grayscale image. 
-For this purpose the warpPerspective function\cite{opencv_warpPerspective} from OpenCV is used:
-\begin{center}
-    $warpPerspective(grayscale\_image, M, (width, height))$
-\end{center}
-The function uses the grayscale image, the calculated perspective Transformation(M), and the size of the 
-output image to perform the transformation. The optional parameters are set to default.
-The output of the transformation can be seen in Figure \ref{fig:transformation}.
-
-% \begin{figure}[H]
-%     \centerline{\includegraphics[width=2.5in]{output/hoch_3_6_transformation.jpg}}
-%     \caption{Document after the transformation.}
-%     \label{fig:transformation}
-% \end{figure}
-
-
 
 
 \section{Summary}
-% adaptive_binary_image = adaptiveThreshold(transformation,255,ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY,11,6)
-%tresh, binary_image = threshold(transformation, 100,255,THRESH_BINARY)
-\noindent
-In the last step of the process, the transformed image is converted into a binary image.
-In various tests, it has been found that an adaptive threshold\cite{opencv_adaptivethreshold} is best suited.
-Both an adaptive gaussian threshold\cite{opencv_adaptivetypes} and an adaptive mean threshold show great performance, 
-though an adaptive mean threshold tends to generate less noise in the outputs.
-
-\begin{center}
-    \noindent
-    $adaptiveThreshold(transformation,255,$\\
-    $ADAPTIVE\_THRESH\_MEAN\_C, $\\
-    $THRESH\_BINARY,7,6)$
-\end{center}
-\noindent
- \noindent
-The chosen adaptive mean threshold value is a mean of the blocksize $7*7$ minus the constant $c=6$.
-The image generated after this process can be seen in figure \ref{fig:binary}
-
-% \begin{figure}[H]
-%     \centerline{\includegraphics[width=2.5in]{output/hoch_3_8_adaptive_binary_image_mean.jpg}}
-%     \caption{The generated binary image.}
-%     \label{fig:binary}
-% \end{figure}
-%The threshold value T(x,y) is a mean of the ������������������×������������������ neighborhood of (x,y) minus C
 
 
 % % Here's where you specify the bibliography style file.
 % % The full file name for the bibliography style file 
 % % used for an ASME paper is asmems4.bst.
 % \bibliographystyle{asmems4}
-\bibliographystyle{alpha}
+\bibliographystyle{asmems4}
 
 % Here's where you specify the bibliography database file.
 % The full file name of the bibliography database for this
