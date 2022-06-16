@@ -1,10 +1,3 @@
-# Abstract (Felix)
-# Introduction (Felix) (Mario macht images)
-# Preprocesseing = Video2Frame, Einlesen, Grayscale (Mario)
-# Corner Detection = komplette for-schleife (Mario)
-# Camera Calibartion = calibrateCamera, getOptimalNewCameraMatrix (Mario)
-# Undistortion = undistort, images, error (felix)
-# Summary = Error und dMatrix nochmal darstellen (felix)
 
 import numpy as np
 import cv2 as cv
