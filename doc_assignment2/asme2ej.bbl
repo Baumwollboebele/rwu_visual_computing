@@ -1,9 +1,5 @@
 \begin{thebibliography}{1}
 
-\bibitem{2014opencv}
-{\sc OpenCV}, 2014,
-\newblock {\em The OpenCV Reference Manual}, 2.4.13.7~ed., April.
-
 \bibitem{opencv_imread}
 Documentary, O.
 \newblock imread
