@@ -42,33 +42,31 @@
             \node[shape=circle,draw,inner sep=2pt, fill=red!40] (char) {#1};}}
 \newcommand*\bluecircled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt, fill=blue!40] (char) {#1};}}
+\usepackage{xcolor}
 
-            \usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
-            \definecolor{codegreen}{rgb}{0,0.6,0}
-            \definecolor{codegray}{rgb}{0.5,0.5,0.5}
-            \definecolor{codepurple}{rgb}{0.58,0,0.82}
-            \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-            
-            \lstdefinestyle{mystyle}{
-                backgroundcolor=\color{backcolour},   
-                commentstyle=\color{codegreen},
-                keywordstyle=\color{magenta},
-                numberstyle=\tiny\color{codegray},
-                stringstyle=\color{codepurple},
-                basicstyle=\ttfamily\footnotesize,
-                breakatwhitespace=false,         
-                breaklines=true,                 
-                captionpos=b,                    
-                keepspaces=true,                 
-                numbers=left,                    
-                numbersep=5pt,                  
-                showspaces=false,                
-                showstringspaces=false,
-                showtabs=false,                  
-                tabsize=2
-            }
-            
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,               
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
 \lstset{style=mystyle}
 
 % \usepackage{url}
@@ -134,8 +132,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{abstract}
-{\it This paper shows in four steps how a pinhole camera model with radial distortion can be undistorted.
+{\it \noindent This paper shows in four steps how a pinhole camera model with radial distortion can be undistorted.
 It shows how the intrinsic and extrinsic properties of the camera can be used to undo the distortion for images taken with this camera.
 }
 \end{abstract}
@@ -152,11 +151,16 @@ It shows how the intrinsic and extrinsic properties of the camera can be used to
 \section{Introduction}
 \label{section:introduction}
 \noindent
+Some Pinhole cameras, especially cheap, uncalibrated ones introduce a distortions to an image as it can be seen in 
+Figure \ref{fig:curvylines}.
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/curvy_lines.PNG}}
-    \caption{Depiction of the undistorted image with lines indicating wrongt dimensions of the chess board.}
+    \centerline{\includegraphics[width=2.9in]{output/curvy_lines.PNG}}
+    \caption{Depiction of a image with a clear view of the distortion of a regular squared shaped chess board.}
     \label{fig:curvylines}
 \end{figure}
+\noindent
+Luckily this distortion can be be reversed by
+calculating and using the intrinsic and extrinsic properties of the camera. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -209,7 +213,7 @@ The returned intrinsic camera matrix from the calibrateCamera function has the v
    f_x & 0 & c_x \\
    0 & f_y & c_y \\
    0 & 0 & 1
-   \end{bmatrix}
+\end{bmatrix}
    $
     \label{eq_calculatedintrinsicmatrix}
 \end{center}
@@ -233,7 +237,7 @@ The optimal intrinsic camera matrix from getOptimalNewCameraMatrix has the follo
    f_x & 0 & c_x \\
    0 & f_y & c_y \\
    0 & 0 & 1
-   \end{bmatrix}
+\end{bmatrix}
    $
     \label{eq_optintrinsicmatrix}
 \end{center}
@@ -242,40 +246,94 @@ With the optimal intrinsic matrix the next step the undistortion can take place.
 \section{Undistortion}
 \label{section:undistortion}
 \noindent
-
+The used pinhole camera distorts the image with a barell distortion 
+as seen in figure \ref{fig:curvylines}.
+\\
+\noindent To calculate the undistortion openCV provides the function:
+\begin{lstlisting}[language=Python]
+    cv.undistort(src, cameraMatrix, distCoeffs[, dst[, newCameraMatrix]]) -> dst
+\end{lstlisting}
+The function takes as input values the image to be rectified, the intrinsic matrix already explained in the Section \ref{section:calibration}, 
+the distortion coefficients and the intrinsic camerea matrix based on the scaling parameters.
+\\\\
+The image is then cropped to the appropriate size using the region of 
+interest \(roi\) which was also calculated in Section \ref{section:calibration}.
+The result of the undistortian can be viewed in Figure. \ref{fig:res2}
+The image will then be set to the appropriate output dimension using the roi also obtained in chapter 2.
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/straight_lines.PNG}}
+    \centerline{\includegraphics[width=2.9in]{output/straight_lines.PNG}}
     \caption{Depiction of the undistorted image with lines indicating the correct dimensions of the chess board.}
     \label{fig:straightlines}
 \end{figure}
 
 \section{Summary}
 \label{section:summary}
+\noindent
+With the four steps from Section \ref{section:preprocessing},
+\ref{section:cornerdetection},\ref{section:calibration} and 
+\ref{section:undistortion} the individual images of the video could 
+be undistorted sufficiently.
+\noindent
+Finally, all the important values that were decisive for the calculation of the undistortion are given here once again.
+On the one hand the intrinsic camera matrix as well as the scaled and shifted camera matrix: 
 
+\begin{center}
+    $Camera Matrix = \begin{bmatrix}
+        1.23 & 0 & 8.96 \\
+   0 & 1.23& 5.17 \\
+   0 & 0 & 1
+   \end{bmatrix}
+   $
+    \label{eq_intrinsicmatrix}
+\end{center}
+
+\begin{center}
+    $Scaled Camera Matrix = \begin{bmatrix}
+        720.50 & 0 & 733.48 \\
+   0 & 78.07 & 464.96 \\
+   0 & 0 & 1
+   \end{bmatrix}
+   $
+    \label{final_intrinsic}
+\end{center}
+The corresponding distortion coefficients are as follows:
+\begin{center}
+    $k_1 = -0.332$\\
+    $k_2 =  0.142$\\
+    $p_1 = -0.001$\\
+    $p_2 = -0.000$\\
+    $k_3 = -0.035$\\
+    \label{eq_distcoeff}
+\end{center}
+\noindent
+An overall error of $0.27$ over all images in the video could be 
+achieved which leads to an output where no distortion can be seen with the human eye.
+The following illustrations show the change from a distorted image to an undistorted image.
 \begin{figure}[H]
-\centerline{\includegraphics[width=2.5in]{output/res1.png}}
+\centerline{\includegraphics[width=2.9in]{output/res1.png}}
 \caption{Depiction of the final undistortion with the chess board located in the bottom left corner.}
 \label{fig:res1}
 \end{figure}
 
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/res2.png}}
+    \centerline{\includegraphics[width=2.9in]{output/res2.png}}
     \caption{Depiction of the final undistortion with the chess board located in the upper left corner.}
     \label{fig:res2}
 \end{figure}
 
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/res3.png}}
+    \centerline{\includegraphics[width=2.9in]{output/res3.png}}
     \caption{Depiction of the final undistortion with the chess board located in the center.}
     \label{fig:res3}
 \end{figure}
 
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.5in]{output/res4.png}}
+    \centerline{\includegraphics[width=2.9in]{output/res4.png}}
     \caption{Depiction of the final undistortion with the chess board located in the upper right corner.}
     \label{fig:res4}
 \end{figure}
 
+\pagebreak
 
 % % Here's where you specify the bibliography style file.
 % % The full file name for the bibliography style file 

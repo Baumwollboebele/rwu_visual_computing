@@ -1,9 +1,7 @@
-This is BibTeX, Version 0.99d
+This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: asme2ej.aux
-Reallocating 'name_of_file' (item size: 1) to 8 items.
 The style file: asmems4.bst
-Reallocating 'name_of_file' (item size: 1) to 7 items.
 Database file #1: asme2e.bib
 Warning--empty year in opencv_imread
 Warning--empty year in opencv_cvtColor
