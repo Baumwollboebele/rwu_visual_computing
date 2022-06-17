@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: asme2ej.aux
+The style file: asmems4.bst
+Database file #1: asme2e.bib
+Warning--empty year in opencv_imread
+Warning--empty year in opencv_cvtColor
+Warning--empty year in opencv_rgb2gray
+Warning--empty year in opencv_findChessboardCorners
+Warning--empty year in opencv_calibrateCamera
+Warning--empty year in opencv_getOptimalNewCameraMatrix
+Warning--empty year in opencv_calibrationtutorial
+You've used 8 entries,
+            1983 wiz_defined-function locations,
+            522 strings with 4723 characters,
+and the built_in function-call counts, 1398 in all, are:
+= -- 125
+> -- 32
+< -- 0
++ -- 16
+- -- 8
+* -- 33
+:= -- 199
+add.period$ -- 8
+call.type$ -- 8
+change.case$ -- 8
+chr.to.int$ -- 0
+cite$ -- 15
+duplicate$ -- 60
+empty$ -- 188
+format.name$ -- 8
+if$ -- 348
+int.to.chr$ -- 0
+int.to.str$ -- 8
+missing$ -- 1
+newline$ -- 51
+num.names$ -- 8
+pop$ -- 64
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 31
+stack$ -- 0
+substring$ -- 40
+swap$ -- 19
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 7
+while$ -- 11
+width$ -- 9
+write$ -- 92
+(There were 7 warnings)

@@ -1,0 +1,58 @@
+\begin{thebibliography}{1}
+
+\bibitem{opencv_imread}
+Documentary, O.
+\newblock imread
+\newblock
+  \url{https://docs.opencv.org/3.4/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{opencv_cvtColor}
+Documentary, O.
+\newblock cvtcolor
+\newblock
+  \url{https://docs.opencv.org/3.4/d8/d01/group__imgproc__color__conversions.html#ga397ae87e1288a81d2363b61574eb8cab}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{opencv_rgb2gray}
+Documentary, O.
+\newblock Color convertion rgb to gray
+\newblock
+  \url{https://docs.opencv.org/3.4/de/d25/imgproc_color_conversions.html#color_convert_rgb_gray}
+\newblock Accessed: 2022-05-09.
+
+\bibitem{opencv_findChessboardCorners}
+Documentary, O.
+\newblock findchessboardcorners
+\newblock
+  \url{https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga93efa9b0aa890de240ca32b11253dd4a}
+\newblock Accessed: 2022-06-14.
+
+\bibitem{opencv_calibrateCamera}
+Documentary, O.
+\newblock calibratecamera
+\newblock
+  \url{https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga3207604e4b1a1758aa66acb6ed5aa65d}
+\newblock Accessed: 2022-06-15.
+
+\bibitem{zhang2000flexible}
+Zhang, Z., 2000,
+\newblock ``A flexible new technique for camera calibration,''
+\newblock {\em IEEE Transactions on pattern analysis and machine intelligence,
+  {\bf 22}}(11), pp.~1330--1334
+\newblock Accessed: 2022-06-15.
+
+\bibitem{opencv_getOptimalNewCameraMatrix}
+Documentary, O.
+\newblock getoptimalnewcameramatrix
+\newblock
+  \url{https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga7a6c4e032c97f03ba747966e6ad862b1}
+\newblock Accessed: 2022-06-15.
+
+\bibitem{opencv_calibrationtutorial}
+Documentary, O.
+\newblock Camera calibration
+\newblock \url{https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html}
+\newblock Accessed: 2022-06-15.
+
+\end{thebibliography}
