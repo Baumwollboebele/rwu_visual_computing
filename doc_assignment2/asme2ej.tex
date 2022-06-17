@@ -134,7 +134,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-{\it \noindent This paper shows in four steps how a pinhole camera model with radial distortion can be undistorted.
+{\it \noindent 
+This paper shows in four steps how a pinhole camera model with barell distortion can be undistorted.
 It shows how the intrinsic and extrinsic properties of the camera can be used to undo the distortion for images taken with this camera.
 }
 \end{abstract}
@@ -159,9 +160,9 @@ Figure \ref{fig:curvylines}.
     \label{fig:curvylines}
 \end{figure}
 \noindent
-Luckily this distortion can be be reversed by
+Thhis distortion can be be reversed by
 calculating and using the intrinsic and extrinsic properties of the camera. 
-
+A step by step explanation will follow in the following sections.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preprocessing}
@@ -192,7 +193,6 @@ If corners of a chessboard are found in the image, the corner points are added t
 \section{Camera Calibration}
 \label{section:calibration}
 \noindent
-
 With the list of corner points the intrinsic camera parameters can be estimated. 
 The OpenCV function calibrateCamera\cite{opencv_calibrateCamera} is used, which is based on the algorithm of the paper by Z.Zhang\cite{zhang2000flexible} from 2000. 
 The first parameter passed is a matrix consisting of vectors of the calibration points in the coordinate space. In this case this matrix is a multi-dimensional meshgrid. Furthermore the list of corner points from the \nameref{section:edgedetection} section and the size of the image are passed to the function. The remaining passing parameters are passed as NoneType and no flags are set. The function returns the root mean squared re-projection error, the intrinsic camera matrix, the distortion coefficients and the rotation and translation vectors.
@@ -279,7 +279,7 @@ On the one hand the intrinsic camera matrix as well as the scaled and shifted ca
 
 \begin{center}
     $Camera Matrix = \begin{bmatrix}
-        1.23 & 0 & 8.96 \\
+    1.23 & 0 & 8.96 \\
    0 & 1.23& 5.17 \\
    0 & 0 & 1
    \end{bmatrix}
@@ -290,7 +290,7 @@ On the one hand the intrinsic camera matrix as well as the scaled and shifted ca
 \begin{center}
     $Scaled Camera Matrix = \begin{bmatrix}
         720.50 & 0 & 733.48 \\
-   0 & 78.07 & 464.96 \\
+   0 & 678.07 & 464.96 \\
    0 & 0 & 1
    \end{bmatrix}
    $
@@ -309,31 +309,31 @@ The corresponding distortion coefficients are as follows:
 An overall error of $0.27$ over all images in the video could be 
 achieved which leads to an output where no distortion can be seen with the human eye.
 The following illustrations show the change from a distorted image to an undistorted image.
+
 \begin{figure}[H]
-\centerline{\includegraphics[width=2.9in]{output/res1.png}}
+    \onecolumn\centerline{\includegraphics[width=6.85in]{output/res1.png}}
 \caption{Depiction of the final undistortion with the chess board located in the bottom left corner.}
 \label{fig:res1}
 \end{figure}
 
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.9in]{output/res2.png}}
+    \onecolumn\centerline{\includegraphics[width=6.85in]{output/res2.png}}
     \caption{Depiction of the final undistortion with the chess board located in the upper left corner.}
     \label{fig:res2}
 \end{figure}
 
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.9in]{output/res3.png}}
+    \onecolumn\centerline{\includegraphics[width=6.85in]{output/res3.png}}
     \caption{Depiction of the final undistortion with the chess board located in the center.}
     \label{fig:res3}
 \end{figure}
 
 \begin{figure}[H]
-    \centerline{\includegraphics[width=2.9in]{output/res4.png}}
+    \onecolumn\centerline{\includegraphics[width=6.85in]{output/res4.png}}
     \caption{Depiction of the final undistortion with the chess board located in the upper right corner.}
     \label{fig:res4}
 \end{figure}
-
-\pagebreak
+\twocolumn
 
 % % Here's where you specify the bibliography style file.
 % % The full file name for the bibliography style file 
